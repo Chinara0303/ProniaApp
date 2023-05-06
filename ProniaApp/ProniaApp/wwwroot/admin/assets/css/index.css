@@ -1,0 +1,15 @@
+﻿td a {
+    font-size: 22px;
+    cursor:pointer;
+}
+
+.create {
+    font-size: 24px;
+}
+td .image{
+    width:100px;
+    height:100px;
+}
+.image{
+    width:300px;
+}
