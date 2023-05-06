@@ -421,7 +421,7 @@ namespace ProniaApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Color");
+                    b.ToTable("Colors");
                 });
 
             modelBuilder.Entity("ProniaApp.Models.Comment", b =>
@@ -998,7 +998,7 @@ namespace ProniaApp.Migrations
             modelBuilder.Entity("ProniaApp.Models.ProductImage", b =>
                 {
                     b.HasOne("ProniaApp.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1064,6 +1064,8 @@ namespace ProniaApp.Migrations
             modelBuilder.Entity("ProniaApp.Models.Product", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("ProductImages");
                 });
 #pragma warning restore 612, 618
         }

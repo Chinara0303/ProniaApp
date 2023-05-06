@@ -4,6 +4,7 @@ using ProniaApp.Data;
 using ProniaApp.Models;
 using ProniaApp.Services.Interfaces;
 using ProniaApp.Services;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,13 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 
 builder.Services.AddScoped<ISliderService, SliderService>();
+builder.Services.AddScoped<IAdvertService, AdvertService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ITagService, TagService>();
+builder.Services.AddScoped<ISizeService, SizeService>();
+builder.Services.AddScoped<IColorService, ColorService>();
+builder.Services.AddScoped<ITestimonialService, TestimonialService>();
+builder.Services.AddScoped(typeof(ICrudService<>), typeof(CrudService<>));
 
 var app = builder.Build();
 

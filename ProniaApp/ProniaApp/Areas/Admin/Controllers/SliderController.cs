@@ -12,17 +12,18 @@ namespace ProniaApp.Areas.Admin.Controllers
     {
         private readonly IWebHostEnvironment _env;
         private readonly ISliderService _sliderService;
-        private readonly AppDbContext _context;
-        public SliderController(IWebHostEnvironment env, ISliderService sliderService,
-            AppDbContext context)
+        private readonly ICrudService<Slider> _crudService;
+        public SliderController(IWebHostEnvironment env, 
+                                ISliderService sliderService,
+                                ICrudService<Slider> crudService)
         {
             _env = env;
             _sliderService = sliderService;
-            _context = context;
+            _crudService = crudService;
         }
         public async Task<IActionResult> Index()
         {
-            var dbSlider = await _sliderService.GetAllAsync();
+            IEnumerable<Slider> dbSlider = await _sliderService.GetAllAsync();
             return View(dbSlider);
         }
 
@@ -59,8 +60,7 @@ namespace ProniaApp.Areas.Admin.Controllers
                     Offer = model.Offer
                 };
 
-                await _context.AddAsync(slider);
-                await _context.SaveChangesAsync();
+                await _crudService.CreateAsync(slider);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -93,8 +93,6 @@ namespace ProniaApp.Areas.Admin.Controllers
                 ViewBag.error = ex.Message;
                 return View();
             }
-
-
         }
 
         [HttpPost]
@@ -142,7 +140,7 @@ namespace ProniaApp.Areas.Admin.Controllers
                 dbSlider.Title = model.Title;
                 dbSlider.Offer = model.Offer;
                 dbSlider.ShortDesc = model.ShortDesc;
-                await _context.SaveChangesAsync();
+                await _crudService.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -164,8 +162,7 @@ namespace ProniaApp.Areas.Admin.Controllers
                 string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/slider", dbSlider.Image);
                 FileHelper.DeleteFile(path);
 
-                _context.Sliders.Remove(dbSlider);
-                await _context.SaveChangesAsync();
+                _crudService.Delete(dbSlider);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

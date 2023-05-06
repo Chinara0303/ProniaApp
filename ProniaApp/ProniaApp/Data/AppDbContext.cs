@@ -27,8 +27,7 @@ namespace ProniaApp.Data
         public DbSet<Social> Socials { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
-
-
+        public DbSet<Color> Colors { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

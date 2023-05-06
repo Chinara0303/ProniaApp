@@ -12,7 +12,6 @@ namespace ProniaApp.Services
         {
             _context = context;
         }
-
         public async Task<IEnumerable<Slider>> GetAllAsync()
         {
             return await _context.Sliders.ToListAsync();
