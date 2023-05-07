@@ -30,7 +30,7 @@
                                     <tbody>
                                         @foreach (var slider in Model)
                                         {
-                                            <tr>
+                                            <tr data-id="@slider.Id">
                                                 <td>
                                                     <div class="image">
                                                         <img class="img-fluid" src="~/assets/images/slider/@slider.Image" />
@@ -39,10 +39,7 @@
                                                 <td>@slider.Title</td>
                                                 <td>@slider.Offer</td>
                                                 <td>@slider.ShortDesc</td>
-                                                <td data-id="@slider.Id">
-                                                  @*  <a asp-action="Info" asp-route-id="@slider.Id" class="info" data-toggle="tooltip" data-original-title="Info">
-                                                        <i class="fa-solid fa-circle-info" style="color: #eaee17;"></i>
-                                                    </a>*@
+                                                <td>
                                                     <a asp-action="Edit" asp-route-id="@slider.Id" data-toggle="tooltip" data-original-title="Edit" class="edit">
                                                         <i class="fa-solid fa-pen-to-square" style="color: #2bca16;"></i>
                                                     </a>

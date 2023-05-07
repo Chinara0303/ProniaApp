@@ -1385,10 +1385,6 @@
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\1.png"
     },
     {
-      "Id": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\18e2861e-9bce-4f85-920e-0c93c3455e23headphone1 (1).png",
-      "PackagePath": "staticwebassets\\assets\\images\\website-images\\18e2861e-9bce-4f85-920e-0c93c3455e23headphone1 (1).png"
-    },
-    {
       "Id": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\2-1-370x270.webp",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\2-1-370x270.webp"
     },
@@ -1421,20 +1417,12 @@
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\3.png"
     },
     {
-      "Id": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\5eded62f-111f-4de3-ba7e-f8f281c01965headphone1 (3).png",
-      "PackagePath": "staticwebassets\\assets\\images\\website-images\\5eded62f-111f-4de3-ba7e-f8f281c01965headphone1 (3).png"
-    },
-    {
-      "Id": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\6a2c4ce1-ce63-43ea-bd80-bce65228d8b6headphone1 (4).png",
-      "PackagePath": "staticwebassets\\assets\\images\\website-images\\6a2c4ce1-ce63-43ea-bd80-bce65228d8b6headphone1 (4).png"
-    },
-    {
-      "Id": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\93c84ea1-9701-4560-8b23-0a6ac5dd71f7headphone1 (3).png",
-      "PackagePath": "staticwebassets\\assets\\images\\website-images\\93c84ea1-9701-4560-8b23-0a6ac5dd71f7headphone1 (3).png"
-    },
-    {
       "Id": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\ad84aacc-0c20-4087-80b5-c68d56cbf375headphone1 (1).png",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\ad84aacc-0c20-4087-80b5-c68d56cbf375headphone1 (1).png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\af9b734a-7316-4028-9885-827f668682a3phone1.png",
+      "PackagePath": "staticwebassets\\assets\\images\\website-images\\af9b734a-7316-4028-9885-827f668682a3phone1.png"
     },
     {
       "Id": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\c3943991-8672-4b16-981a-ddcf51c5ab51laptop (2).png",
@@ -1449,8 +1437,8 @@
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\card.png"
     },
     {
-      "Id": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\dark.png",
-      "PackagePath": "staticwebassets\\assets\\images\\website-images\\dark.png"
+      "Id": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\ea266f07-cda4-4626-953f-86c58377df6claptop (2).png",
+      "PackagePath": "staticwebassets\\assets\\images\\website-images\\ea266f07-cda4-4626-953f-86c58377df6claptop (2).png"
     },
     {
       "Id": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\quotation.png",

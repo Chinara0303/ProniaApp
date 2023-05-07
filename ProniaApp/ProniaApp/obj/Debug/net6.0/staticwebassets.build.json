@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Y+OZHevotEeHZUG+11QmepcPof9knxT6hKdz9+4zBWA=",
+  "Hash": "5NEjhRogW59GhgG1vQU4bZc9uBNMsTxAfoRyqKi0N2g=",
   "Source": "ProniaApp",
   "BasePath": "_content/ProniaApp",
   "Mode": "Default",
@@ -5899,23 +5899,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\1-8-270x300.jpg"
     },
     {
-      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\18e2861e-9bce-4f85-920e-0c93c3455e23headphone1 (1).png",
-      "SourceId": "ProniaApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
-      "BasePath": "_content/ProniaApp",
-      "RelativePath": "assets/images/website-images/18e2861e-9bce-4f85-920e-0c93c3455e23headphone1 (1).png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\18e2861e-9bce-4f85-920e-0c93c3455e23headphone1 (1).png"
-    },
-    {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\1-9-270x300.jpg",
       "SourceId": "ProniaApp",
       "SourceType": "Discovered",
@@ -6069,57 +6052,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\3.png"
     },
     {
-      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\5eded62f-111f-4de3-ba7e-f8f281c01965headphone1 (3).png",
-      "SourceId": "ProniaApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
-      "BasePath": "_content/ProniaApp",
-      "RelativePath": "assets/images/website-images/5eded62f-111f-4de3-ba7e-f8f281c01965headphone1 (3).png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\5eded62f-111f-4de3-ba7e-f8f281c01965headphone1 (3).png"
-    },
-    {
-      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\6a2c4ce1-ce63-43ea-bd80-bce65228d8b6headphone1 (4).png",
-      "SourceId": "ProniaApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
-      "BasePath": "_content/ProniaApp",
-      "RelativePath": "assets/images/website-images/6a2c4ce1-ce63-43ea-bd80-bce65228d8b6headphone1 (4).png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\6a2c4ce1-ce63-43ea-bd80-bce65228d8b6headphone1 (4).png"
-    },
-    {
-      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\93c84ea1-9701-4560-8b23-0a6ac5dd71f7headphone1 (3).png",
-      "SourceId": "ProniaApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
-      "BasePath": "_content/ProniaApp",
-      "RelativePath": "assets/images/website-images/93c84ea1-9701-4560-8b23-0a6ac5dd71f7headphone1 (3).png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\93c84ea1-9701-4560-8b23-0a6ac5dd71f7headphone1 (3).png"
-    },
-    {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\ad84aacc-0c20-4087-80b5-c68d56cbf375headphone1 (1).png",
       "SourceId": "ProniaApp",
       "SourceType": "Discovered",
@@ -6135,6 +6067,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\ad84aacc-0c20-4087-80b5-c68d56cbf375headphone1 (1).png"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\af9b734a-7316-4028-9885-827f668682a3phone1.png",
+      "SourceId": "ProniaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
+      "BasePath": "_content/ProniaApp",
+      "RelativePath": "assets/images/website-images/af9b734a-7316-4028-9885-827f668682a3phone1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\af9b734a-7316-4028-9885-827f668682a3phone1.png"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\c3943991-8672-4b16-981a-ddcf51c5ab51laptop (2).png",
@@ -6188,12 +6137,12 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\card.png"
     },
     {
-      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\dark.png",
+      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\ea266f07-cda4-4626-953f-86c58377df6claptop (2).png",
       "SourceId": "ProniaApp",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
       "BasePath": "_content/ProniaApp",
-      "RelativePath": "assets/images/website-images/dark.png",
+      "RelativePath": "assets/images/website-images/ea266f07-cda4-4626-953f-86c58377df6claptop (2).png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -6202,7 +6151,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\dark.png"
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\ea266f07-cda4-4626-953f-86c58377df6claptop (2).png"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\quotation.png",

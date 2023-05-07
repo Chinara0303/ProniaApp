@@ -53,19 +53,43 @@ namespace ProniaApp.Data
             modelBuilder.Entity<SectionHeader>().HasQueryFilter(p => !p.SoftDelete);
             modelBuilder.Entity<Advert>().HasQueryFilter(p => !p.SoftDelete);
 
-            //modelBuilder.Entity<Setting>().HasData(
-            //new Setting
-            //{
-            //    Id = 1,
-            //    Key = "HeaderLogo",
-            //    Value = "logo.png"
-            //},
-            //new Setting
-            //{
-            //    Id = 2,
-            //    Key = "CardLogo",
-            //    Value = "footer-bottom-1.png"
-            //});
+            modelBuilder.Entity<Setting>().HasData(
+            new Setting
+            {
+                Id = 1,
+                Key = "Logo",
+                Value = "dark.png"
+            },
+            new Setting
+            {
+                Id = 2,
+                Key = "Phone",
+                Value = "+00 123 456 789"
+            },
+            new Setting
+            {
+                Id = 3,
+                Key = "Offer",
+                Value = "HELLO EVERYONE!25 % Off All Products"
+            },
+            new Setting
+            {
+                Id = 4,
+                Key = "PaymentImg",
+                Value = "1.png"
+            },
+            new Setting
+            {
+                Id = 5,
+                Key = "Email",
+                Value = "info@example.com"
+            },
+            new Setting
+            {
+                Id = 6,
+                Key = "Address",
+                Value = "13, Your Address, Here"
+            });
         }
     }
 }

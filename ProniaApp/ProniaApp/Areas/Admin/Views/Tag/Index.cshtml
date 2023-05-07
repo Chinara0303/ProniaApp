@@ -27,13 +27,13 @@
                                     <tbody>
                                         @foreach (var tag in Model)
                                         {
-                                            <tr>
+                                            <tr data-id="@tag.Id">
                                                 <td>@tag.Name</td>
-                                                <td data-id="@tag.Id">
+                                                <td >
                                                     <a asp-action="Edit" asp-route-id="@tag.Id" data-toggle="tooltip" data-original-title="Edit" class="edit">
                                                         <i class="fa-solid fa-pen-to-square" style="color: #2bca16;"></i>
                                                     </a>
-                                                    <a class="delete-tag" data-toggle="tooltip" data-original-title="Remove">
+                                                    <a class="delete" data-toggle="tooltip" data-original-title="Remove">
                                                         <i class="fa-solid fa-trash" style="color: #c81921;"></i>
                                                     </a>
                                                 </td>

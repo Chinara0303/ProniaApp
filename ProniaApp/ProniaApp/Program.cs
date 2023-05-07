@@ -40,7 +40,9 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<ISizeService, SizeService>();
 builder.Services.AddScoped<IColorService, ColorService>();
+builder.Services.AddScoped<IBannerService, BannerService>();
 builder.Services.AddScoped<ITestimonialService, TestimonialService>();
+builder.Services.AddScoped<ILayoutService, LayoutService>();
 builder.Services.AddScoped(typeof(ICrudService<>), typeof(CrudService<>));
 
 var app = builder.Build();

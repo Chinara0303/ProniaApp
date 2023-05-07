@@ -1,0 +1,90 @@
+﻿@model LayoutVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+@section Css{
+    <link rel="stylesheet" href="~/admin/assets/css/index.css">
+}
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Settings)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Value
+                                            </td>
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id=" @item.Id" data-toggle="tooltip" data-original-title="Edit" class="edit">
+                                                    <i class="fa-solid fa-pen-to-square" style="color: #2bca16;"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                    @*  <tr>
+                                    <td>
+                                    <div class="image">
+                                    <a asp-route-id="@Model.Settings[3].Id" asp-action="Edit">
+                                    <img class="img-fluid" src="~/assets/images/website-images/@Model.Settings[]" />
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>
+                                    <div class="image">
+                                    <a asp-route-id="@Model.Settings[0].Id" asp-action="Edit">
+                                    <img class="img-fluid" src="~/assets/images/logo/@Model.Settings[0].Value" />
+                                    </a>
+                                    </div>
+                                    </td>
+
+                                    </tr>
+                                    <tr>
+                                    <td>
+                                    <a asp-action="Edit" asp-route-value="@Model.Settings["Phone"]">
+                                    @Model.Settings["Phone"]
+                                    </a>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>
+                                    <a asp-action="Edit" asp-route-value="@Model.Settings["Email"]">
+                                    @Model.Settings["Email"]
+                                    </a>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>
+                                    <a asp-action="Edit" asp-route-value="@Model.Settings["Address"]">
+                                    @Model.Settings["Address"]
+                                    </a>
+                                    </td>
+                                    </tr>*@
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Script{
+    <script src="~/admin/assets/js/index.js"></script>
+}

@@ -37,14 +37,14 @@
                                                 </td>
                                                 <td>@advert.Title</td>
                                                 <td>@advert.ShortDesc</td>
-                                                <td data-id="@advert.Id">
+                                                <td>
                                                     <a asp-action="Info" asp-route-id="@advert.Id" class="info" data-toggle="tooltip" data-original-title="Info">
                                                         <i class="fa-solid fa-circle-info" style="color: #eaee17;"></i>
                                                     </a>
                                                     <a asp-action="Edit" asp-route-id="@advert.Id" data-toggle="tooltip" data-original-title="Edit" class="edit">
                                                         <i class="fa-solid fa-pen-to-square" style="color: #2bca16;"></i>
                                                     </a>
-                                                    <a class="delete-advert" data-toggle="tooltip" data-original-title="Remove">
+                                                    <a class="delete" data-toggle="tooltip" data-original-title="Remove">
                                                         <i class="fa-solid fa-trash" style="color: #c81921;"></i>
                                                     </a>
                                                 </td>

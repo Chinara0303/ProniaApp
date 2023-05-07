@@ -30,7 +30,7 @@
                                     <tbody>
                                         @foreach (var testimonial in Model)
                                         {
-                                            <tr>
+                                            <tr data-id="@testimonial.Id">
                                                 <td>
                                                     <div class="image">
                                                         <img class="img-fluid" src="~/assets/images/website-images/@testimonial.Image" />
@@ -39,7 +39,7 @@
                                                 <td>@testimonial.Name</td>
                                                 <td>@testimonial.Profession</td>
                                                 <td>@testimonial.Description</td>
-                                                <td data-id="@testimonial.Id">
+                                                <td >
                                                     <a asp-action="Edit" asp-route-id="@testimonial.Id" data-toggle="tooltip" data-original-title="Edit" class="edit">
                                                         <i class="fa-solid fa-pen-to-square" style="color: #2bca16;"></i>
                                                     </a>
