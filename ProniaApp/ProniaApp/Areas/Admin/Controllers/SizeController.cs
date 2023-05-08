@@ -54,16 +54,24 @@ namespace ProniaApp.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id is null) return BadRequest();
-            Size dbSize = await _sizeService.GetByIdAsync((int)id);
-            if (dbSize is null) return NotFound();
-
-            SizeVM size = new()
+            try
             {
-                Id = dbSize.Id,
-                Name = dbSize.Name,
-            };
-            return View(size);
+                if (id is null) return BadRequest();
+                Size dbSize = await _sizeService.GetByIdAsync((int)id);
+                if (dbSize is null) return NotFound();
+
+                SizeVM size = new()
+                {
+                    Id = dbSize.Id,
+                    Name = dbSize.Name,
+                };
+                return View(size);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.error = ex.Message;
+                return View();
+            }
         }
 
         [HttpPost]

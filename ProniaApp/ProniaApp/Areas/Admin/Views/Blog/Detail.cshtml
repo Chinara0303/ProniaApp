@@ -1,0 +1,56 @@
+﻿@model BlogDetailVM
+@{
+    ViewData["Title"] = "Detail";
+}
+@section Css{
+    <link rel="stylesheet" href="~/admin/assets/css/index.css">
+
+}
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex align-items-center images">
+                    @foreach (var item in Model.Images)
+                    {
+                        <div style="width:200px; margin-right:10px;" data-id="@item.Id">
+                            <img class="img-fluid" src="~/assets/images/website-images/@item.ImgName" />
+                            <div class=" d-flex align-items-center justify-content-center" data-id="@item.Id">
+                                <div class="statuses" style=" margin-left:10px;">
+                                    @if (item.IsMain)
+                                    {
+                                        <div class="active-status image-status"></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="de-active image-status"></div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <span class="text-danger "></span>
+                <form method="post" enctype="multipart/form-data" asp-action="Edit">
+                    <span class="text-danger">@ViewBag.error</span>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input disabled class="form-control" asp-for="Title">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea disabled class="form-control" rows="3" asp-for="Description"></textarea>
+                    </div>
+                    <a asp-action="Index" class="btn btn-success"><i class="feather mr-2 icon-check-circle"></i>Go to list</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Script{
+    <script src="~/admin/assets/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+}
+
+

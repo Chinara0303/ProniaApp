@@ -8,6 +8,6 @@ namespace ProniaApp.Services.Interfaces
         void Delete(T entity);
         Task SaveAsync();
         void Edit(T entity);
-        Task AddRangeAsync(T entity);
+
     }
 }

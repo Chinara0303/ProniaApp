@@ -13,3 +13,31 @@ td .image{
 .image{
     width:300px;
 }
+
+
+.active-status {
+    width: 20px;
+    height: 20px;
+    background-color: greenyellow;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.de-active {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.img-detail {
+    width: 500px;
+}
+.delete-image{
+    font-size:18px;
+}
+
+.statutes {
+    width: 60px !important;
+}

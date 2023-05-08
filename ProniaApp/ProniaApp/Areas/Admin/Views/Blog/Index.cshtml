@@ -29,13 +29,16 @@
                                     <tbody>
                                         @foreach (var blog in Model)
                                         {
-                                            @*<tr data-id="@blog.Id">
+                                            <tr data-id="@blog.Id">
                                                 <td>
                                                     <div class="image"><img class="img-fluid" src="~/assets/images/website-images/@blog.BlogImages.FirstOrDefault()?.ImgName" /></div>
                                                 </td>
                                                 <td>@blog.Title</td>
-                                                <td>@blog.Description.Substring(0,50)</td>
+                                                <td>@blog.Description</td>
                                                 <td>
+                                                    <a asp-action="Detail" asp-route-id="@blog.Id" data-toggle="tooltip" data-original-title="Detail" class="detail">
+                                                        <i class="fa-solid fa-circle-info" style="color: #d8d10e;"></i>
+                                                    </a>
                                                     <a asp-action="Edit" asp-route-id="@blog.Id" data-toggle="tooltip" data-original-title="Edit" class="edit">
                                                         <i class="fa-solid fa-pen-to-square" style="color: #2bca16;"></i>
                                                     </a>
@@ -43,7 +46,7 @@
                                                         <i class="fa-solid fa-trash" style="color: #c81921;"></i>
                                                     </a>
                                                 </td>
-                                            </tr>*@
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>

@@ -5,9 +5,6 @@ namespace ProniaApp.Areas.Admin.ViewModels.Blog
     public class BlogCreateVM
     {
         [Required(ErrorMessage = "Don`t be empty")]
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "Don`t be empty")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Don`t be empty")]
