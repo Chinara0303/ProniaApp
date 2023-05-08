@@ -26507,7 +26507,7 @@ body.box-layout .pcoded-navbar.theme-horizontal ~ .pcoded-header {
 .table td,
 .table th {
     border-top: 1px solid #e2e5e8;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
     padding: 1.05rem 0.75rem;
 }
 

@@ -635,8 +635,10 @@ img {
   width: 20px;
   height: 20px;
   margin-right: 15px;
-  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-          animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out
+ both;
+          animation: sk-bouncedelay 1.4s infinite ease-in-out
+ both;
 }
 
 .preloader-active .preloader-area-wrap .spinner div.bounce1 {
@@ -3478,8 +3480,8 @@ blockquote p {
   border-color: #abd373;
   border-style: dashed;
   color: #abd373;
-}
 
+}
 .product-tab-nav.tab-style-1 li a:hover {
   border-color: #abd373;
   border-style: dashed;

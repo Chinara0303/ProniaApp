@@ -14,6 +14,12 @@ namespace ProniaApp.Services
             _context = context;
             entities = context.Set<T>();
         }
+
+        public async Task AddRangeAsync(T entity)
+        { 
+            await entities.AddRangeAsync(entity);
+        }
+
         public async Task CreateAsync(T entity)
         {
             await entities.AddAsync(entity);

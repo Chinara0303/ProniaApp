@@ -1,5 +1,16 @@
 ﻿$(function () {
     //delete 
+
+    RemoveItem("/Admin/Slider/Delete");
+    RemoveItem("/Admin/Advert/Delete");
+    RemoveItem("/Admin/Category/Delete");
+    RemoveItem("/Admin/Size/Delete");
+    RemoveItem("/Admin/Testimonial/Delete");
+    RemoveItem("/Admin/Color/Delete");
+    RemoveItem("/Admin/Tag/Delete");
+    RemoveItem("/Admin/Banner/Delete");
+    RemoveItem("/Admin/Brand/Delete");
+
     function RemoveItem(url) {
         $(document).on("click", ".delete", function (e) {
             e.preventDefault()
@@ -27,14 +38,6 @@
         })
     }
 
-    RemoveItem("/Admin/Slider/Delete");
-    RemoveItem("/Admin/Advert/Delete");
-    RemoveItem("/Admin/Category/Delete");
-    RemoveItem("/Admin/Size/Delete");
-    RemoveItem("/Admin/Testimonial/Delete");
-    RemoveItem("/Admin/Color/Delete");
-    RemoveItem("/Admin/Tag/Delete");
-    RemoveItem("/Admin/Banner/Delete");
 
    
 })

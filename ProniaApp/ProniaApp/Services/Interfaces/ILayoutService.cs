@@ -4,8 +4,15 @@ namespace ProniaApp.Services.Interfaces
 {
     public interface ILayoutService
     {
-        Dictionary<string, string> GetSettingDatas();
-        Setting GetByValue(int? id);
+        Task<List<Setting>> GetSettingDatas();
+        Setting GetById(int? id);
+        Task<IEnumerable<SectionHeader>> GetSectionsDatasAsync();
+        Task<SectionHeader> GetSectionAsync(int? id);
+        Task<IEnumerable<SectionBackgroundImage>> GetSectionBackgroundImageDatasAsync();
+        Task<SectionBackgroundImage> GetSectionBackgroundImageByIdAsync(int? id);
+
+
+
 
     }
 }

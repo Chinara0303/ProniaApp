@@ -17,48 +17,40 @@ namespace ProniaApp.Areas.Admin.Controllers
         private readonly IWebHostEnvironment _env;
         private readonly ICrudService<Slider> _crudService;
         private readonly ILayoutService _layoutService;
-        private readonly AppDbContext _context;
 
         public SettingController(IWebHostEnvironment env,
-                                ILayoutService layoutService, AppDbContext context, ICrudService<Slider> crudService)
+                                ILayoutService layoutService,
+                                ICrudService<Slider> crudService)
         {
             _crudService = crudService;
-            _context = context;
             _env = env;
             _layoutService = layoutService;
         }
-        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            LayoutVM model = new()
-            {
-                Settings = await _context.Settings.ToListAsync()
-            };
-
-            return View(model);
+            return View(await _layoutService.GetSettingDatas());
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            var dbSsetting = _layoutService.GetByValue((int)id);
+            var dbSsetting = _layoutService.GetById((int)id);
 
             return View(dbSsetting);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAsync(int? id, Setting setting)
+        public async Task<IActionResult> Edit(int? id, Setting setting)
         {
             try
             {
-                var dbSetting = _layoutService.GetByValue((int)id);
+                var dbSetting = _layoutService.GetById((int)id);
 
                 if (dbSetting == null) return View();
 
 
-
-                if (dbSetting.Value.Contains(".png"))
+                if (dbSetting.Value.Contains(".png") || dbSetting.Value.Contains(".jpg") || dbSetting.Value.Contains(".jpeg"))
                 {
                     if (setting.LogoPhoto is not null)
                     {
@@ -90,13 +82,14 @@ namespace ProniaApp.Areas.Admin.Controllers
 
                     if (dbSetting.Value.Trim().ToLower() == setting.Value.Trim().ToLower())
                     {
-                       
+
                         return RedirectToAction(nameof(Index));
                     }
+                    dbSetting.Value = setting.Value;
+
                 }
-               
-                dbSetting.Value=setting.Value;  
-                 await _crudService.SaveAsync();
+
+                await _crudService.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
