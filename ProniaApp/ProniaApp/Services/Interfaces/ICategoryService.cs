@@ -6,5 +6,7 @@ namespace ProniaApp.Services.Interfaces
     {
         Task<IEnumerable<Category>> GetAllAsync();
         Task<Category> GetByIdAsync(int? id);
+        bool CheckByName(string name);
+
     }
 }

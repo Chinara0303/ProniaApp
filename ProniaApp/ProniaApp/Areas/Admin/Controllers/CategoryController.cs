@@ -39,6 +39,13 @@ namespace ProniaApp.Areas.Admin.Controllers
             {
                 if (!ModelState.IsValid) return View();
 
+
+                if (_categoryService.CheckByName(model.Name))
+                {
+                    ModelState.AddModelError("Name", "Name already exist");
+                    return View(model);
+                }
+
                 Category category = new()
                 {
                     Name = model.Name

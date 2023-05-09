@@ -38,10 +38,13 @@ namespace ProniaApp.Areas.Admin.Controllers
             {
                 if (!ModelState.IsValid) return View();
 
-                Tag tag = new()
+                if (_tagService.CheckByName(model.Name))
                 {
-                    Name = model.Name
-                };
+                    ModelState.AddModelError("Name", "Name already exist");
+                    return View(model);
+                }
+
+                Tag tag = new() { Name = model.Name };
 
                 await _crudService.CreateAsync(tag);
                 return RedirectToAction(nameof(Index));

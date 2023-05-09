@@ -44,6 +44,7 @@ builder.Services.AddScoped<IBannerService, BannerService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ITestimonialService, TestimonialService>();
 builder.Services.AddScoped<IBlogService, BlogService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ILayoutService, LayoutService>();
 builder.Services.AddScoped(typeof(ICrudService<>), typeof(CrudService<>));
 

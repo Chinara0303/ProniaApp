@@ -2,6 +2,7 @@
 using ProniaApp.Areas.Admin.ViewModels.Category;
 using ProniaApp.Areas.Admin.ViewModels.Size;
 using ProniaApp.Models;
+using ProniaApp.Services;
 using ProniaApp.Services.Interfaces;
 
 namespace ProniaApp.Areas.Admin.Controllers
@@ -35,6 +36,12 @@ namespace ProniaApp.Areas.Admin.Controllers
             try
             {
                 if (!ModelState.IsValid) return View();
+
+                if (_sizeService.CheckByName(model.Name))
+                {
+                    ModelState.AddModelError("Name", "Name already exist");
+                    return View(model);
+                }
 
                 Size size = new()
                 {

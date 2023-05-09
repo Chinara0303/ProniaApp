@@ -154,7 +154,7 @@ namespace ProniaApp.Areas.Admin.Controllers
                     {
                         BlogImage blogImage = new()
                         {
-                            ImgName = photo.CreateFile(_env, "assets/images/website-images")
+                            ImgName = photo.CreateFile(_env, "assets/images/website-images"),
                         };
                         blogImages.Add(blogImage);
                     }
@@ -167,7 +167,7 @@ namespace ProniaApp.Areas.Admin.Controllers
                     Id = model.Id,
                     Title = model.Title,
                     Description = model.Description,
-                    BlogImages = blogImages.Count == 0 ? dbBlog.BlogImages : blogImages
+                    BlogImages = blogImages.Count == 0 ? dbBlog.BlogImages : blogImages,
                 };
                  _crudService.Edit(newBlog);
 
@@ -189,6 +189,7 @@ namespace ProniaApp.Areas.Admin.Controllers
                 Blog dbBlog = await _blogService.GetByIdAsync((int)id);
 
                 if (dbBlog is null) return NotFound();
+
                 BlogDetailVM model = new()
                 {
                     Id = dbBlog.Id,
@@ -260,7 +261,13 @@ namespace ProniaApp.Areas.Admin.Controllers
                 if (dbBlog is null) return NotFound();
 
 
-                image.IsMain = !image.IsMain;
+                if (!image.IsMain)
+                {
+                    image.IsMain = true;
+                    await _crudService.SaveAsync();
+
+                }
+
 
                 var images = dbBlog.BlogImages.Where(m => m.Id != id).ToList();
 
@@ -269,16 +276,10 @@ namespace ProniaApp.Areas.Admin.Controllers
                     if (item.IsMain)
                     {
                         item.IsMain = false;
+                        await _crudService.SaveAsync();
                     }
-                    await _crudService.SaveAsync();
-
-                    //item.IsMain = !item.IsMain;
                 }
                
-              
-              
-                await _crudService.SaveAsync();
-
                 return Ok(image.IsMain);
             }
             catch (Exception ex)

@@ -31,7 +31,7 @@
                                         {
                                             <tr data-id="@blog.Id">
                                                 <td>
-                                                    <div class="image"><img class="img-fluid" src="~/assets/images/website-images/@blog.BlogImages.FirstOrDefault()?.ImgName" /></div>
+                                                    <div class="image"><img class="img-fluid" src="~/assets/images/website-images/@blog.BlogImages.Where(bi=>bi.IsMain).FirstOrDefault()?.ImgName" /></div>
                                                 </td>
                                                 <td>@blog.Title</td>
                                                 <td>@blog.Description</td>

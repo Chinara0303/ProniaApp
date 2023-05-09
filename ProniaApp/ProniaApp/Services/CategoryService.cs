@@ -12,6 +12,12 @@ namespace ProniaApp.Services
         {
             _context = context;
         }
+
+        public bool CheckByName(string name)
+        {
+            return _context.Categories.Any(c => c.Name.Trim().ToLower() == name.Trim().ToLower());
+        }
+
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
             return await _context.Categories.ToListAsync();

@@ -11,13 +11,33 @@
     RemoveItem("/Admin/Banner/Delete");
     RemoveItem("/Admin/Brand/Delete");
     RemoveItem("/Admin/Blog/Delete");
+    RemoveItem("/Admin/Product/Delete");
 
-   
-  
+
+
     SetStatus("/Admin/Blog/SetStatus");
 
     RemoveImage("/Admin/Blog/DeleteBlogImage");
-   
+
+    RemoveProductImage("/Admin/Product/DeleteProductImage");
+
+    function RemoveProductImage(url) {
+        $(document).on("click", ".delete-image", function (e) {
+            e.preventDefault()
+            let deleteItem = $(this).parent().parent();
+            let imageId = $(this).parent().attr("data-id");
+            let data = { id: imageId }
+
+            $.ajax({
+                url: url,
+                type: "Post",
+                data: data,
+                success: function () {
+                    $(deleteItem).remove();
+                }
+            })
+        })
+    }
 
     function RemoveItem(url) {
         $(document).on("click", ".delete", function (e) {
@@ -51,11 +71,13 @@
             let deleteItem = $(this).parent().parent();
             let imageId = $(this).parent().attr("data-id");
             let data = { id: imageId }
+
             $.ajax({
                 url: url,
                 type: "Post",
                 data: data,
                 success: function (res) {
+
                     if (res.result) {
                         $(deleteItem).remove();
                         let imagesId = $(".images").children().eq(0).attr("data-id");
@@ -77,8 +99,9 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
-
                     }
+
+
                 }
             })
         })
@@ -94,38 +117,27 @@
                 type: "Post",
                 data: data,
                 success: function (res) {
+                    debugger
                     if (res) {
                         for (var elem of elems) {
                             debugger
                             if ($(elem).hasClass("active-status")) {
-                                debugger
                                 $(elem).removeClass("active-status")
                                 $(elem).addClass("de-active")
                             }
-                            else {
-                                $(elem).addClass("de-active")
-                                $(elem).addClass("active-status")
+                            if ($(changeElem).hasClass("active-status")) {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'One picture must be the main',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
                             }
                         }
                         if ($(changeElem).hasClass("de-active")) {
-                            debugger
                             $(changeElem).removeClass("de-active");
                             $(changeElem).addClass("active-status");
-                        }
-                    }
-                    else {
-                        debugger
-                        for (var elem of elems) {
-                            if ($(elem).hasClass("de-active")) {
-                                debugger
-                                $(elem).removeClass("de-active")
-                                $(elem).addClass("active-status")
-                            }
-                        }
-                        if ($(changeElem).hasClass("active-status")) {
-                            debugger
-                            $(changeElem).removeClass("active-status");
-                            $(changeElem).addClass("de-active");
                         }
                     }
                 }

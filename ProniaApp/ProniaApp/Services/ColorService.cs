@@ -21,5 +21,10 @@ namespace ProniaApp.Services
         {
             return await _context.Colors.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
         }
+        public bool CheckByName(string name)
+        {
+            return _context.Colors.Any(c => c.Name.Trim().ToLower() == name.Trim().ToLower());
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProniaApp.Models
 {
@@ -9,7 +10,7 @@ namespace ProniaApp.Models
         public decimal Price { get; set; }
         public string SKU { get; set; }
         public int Rating { get; set; } = 5;
-        public int SaleCount { get; set; }
+        public int SaleCount { get; set; } 
         public int StockCount { get; set; }
         public string MainImage { get; set; }
         public string HoverImage { get; set; }
@@ -18,5 +19,9 @@ namespace ProniaApp.Models
 
         public ICollection<ProductImage> ProductImages { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<ProductCategory> ProductCategories { get; set; }
+        public ICollection<ProductSize> ProductSizes { get; set; }
+        public ICollection<ProductTag> ProductTags { get; set; }
+       
     }
 }
