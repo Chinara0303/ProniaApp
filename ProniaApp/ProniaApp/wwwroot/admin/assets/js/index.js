@@ -16,28 +16,11 @@
 
 
     SetStatus("/Admin/Blog/SetStatus");
+    SetStatus("/Admin/Product/SetStatus");
 
     RemoveImage("/Admin/Blog/DeleteBlogImage");
+    RemoveImage("/Admin/Product/DeleteProductImage");
 
-    RemoveProductImage("/Admin/Product/DeleteProductImage");
-
-    function RemoveProductImage(url) {
-        $(document).on("click", ".delete-image", function (e) {
-            e.preventDefault()
-            let deleteItem = $(this).parent().parent();
-            let imageId = $(this).parent().attr("data-id");
-            let data = { id: imageId }
-
-            $.ajax({
-                url: url,
-                type: "Post",
-                data: data,
-                success: function () {
-                    $(deleteItem).remove();
-                }
-            })
-        })
-    }
 
     function RemoveItem(url) {
         $(document).on("click", ".delete", function (e) {
@@ -53,6 +36,7 @@
                 success: function () {
                     if ($(tbody).length == 1) {
                         $(".table").remove();
+                        (".paginate-area").remove();
                     }
                     for (let item of deleteElem) {
                         if ($(item).attr("data-id") == id) {
@@ -77,8 +61,8 @@
                 type: "Post",
                 data: data,
                 success: function (res) {
-
                     if (res.result) {
+                        debugger
                         $(deleteItem).remove();
                         let imagesId = $(".images").children().eq(0).attr("data-id");
                         let data = $(".images").children().eq(0);
@@ -95,7 +79,7 @@
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Blog image must be minimum one',
+                            title: 'Image must be minimum one',
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -117,10 +101,8 @@
                 type: "Post",
                 data: data,
                 success: function (res) {
-                    debugger
                     if (res) {
                         for (var elem of elems) {
-                            debugger
                             if ($(elem).hasClass("active-status")) {
                                 $(elem).removeClass("active-status")
                                 $(elem).addClass("de-active")

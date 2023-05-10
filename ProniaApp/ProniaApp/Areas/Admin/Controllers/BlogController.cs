@@ -212,8 +212,8 @@ namespace ProniaApp.Areas.Admin.Controllers
             {
                 if (id is null) return BadRequest();
                 BlogImage image = await _blogService.GetImageById((int)id);
-
                 if (image is null) return NotFound();
+
                 Blog dbBlog = await _blogService.GetBlogByImageId((int)id);
                 if (dbBlog is null) return NotFound();
 
@@ -265,7 +265,6 @@ namespace ProniaApp.Areas.Admin.Controllers
                 {
                     image.IsMain = true;
                     await _crudService.SaveAsync();
-
                 }
 
 

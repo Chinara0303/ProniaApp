@@ -10,43 +10,33 @@
         <div class="row">
             <div class="col-12">
                 <span class="text-danger">@ViewBag.error</span>
-                <div class="d-flex align-items-center images my-3">
+                <div class="d-flex align-items-center images">
                     @foreach (var item in Model.ProductImages)
                     {
                         <div style="width:200px; margin-right:10px;" data-id="@item.Id">
                             <img class="img-fluid" src="~/assets/images/website-images/@item.ImgName" />
                             <div class=" d-flex align-items-center justify-content-center" data-id="@item.Id">
                                 <a class="delete-image"><i class="fa-solid fa-trash" style="color: #c60101; cursor:pointer;"></i></a>
+                                <div class="statuses" style=" margin-left:10px;">
+                                    @if (item.IsMain)
+                                    {
+                                        <div class="active-status image-status"></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="de-active image-status"></div>
+                                    }
+                                </div>
                             </div>
                         </div>
                     }
-
-                </div> <div class="d-flex align-items-center images my-3">
-                <div style="width:200px; margin-right:10px;">
-                    <label>Main Image</label>
-                    <img class="img-fluid" src="~/assets/images/website-images/@Model.MainImage" />
                 </div>
-                <div style="width:200px; margin-right:10px;">
-                    <label>Hover Image</label>
-                    <img class="img-fluid" src="~/assets/images/website-images/@Model.HoverImage" />
-                </div>
-                </div>
-                <form method="post" enctype="multipart/form-data" asp-action="Edit">
+                <form method="post" enctype="multipart/form-data" asp-action="Edit" asp-route-page="@ViewBag.page">
                     <span class="text-danger">@ViewBag.error</span>
                     <div class="form-group">
                         <label>Images</label>
                         <input class="form-control" asp-for="Photos">
                         <span class="text-danger" asp-validation-for="Photos"></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Main Image</label>
-                        <input class="form-control" asp-for="MainPhoto">
-                        <span class="text-danger" asp-validation-for="MainPhoto"></span>
-                    </div>
-                    <div class="form-group">
-                        <label> Hover Image</label>
-                        <input class="form-control" asp-for="HoverPhoto">
-                        <span class="text-danger" asp-validation-for="HoverPhoto"></span>
                     </div>
                     <div class="form-group">
                         <label>Title</label>
@@ -67,6 +57,17 @@
                         <label>Stock Count</label>
                         <input class="form-control" asp-for="StockCount" type="number" />
                         <span class="text-danger" asp-validation-for="StockCount"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Sale Count</label>
+                        <input class="form-control" asp-for="SaleCount" type="number" />
+                        <span class="text-danger" asp-validation-for="SaleCount"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <input class="form-control" asp-for="Rating"/>
+                        <span class="text-danger" asp-validation-for="Rating"></span>
                     </div>
                     <div class="form-group">
                         <label>Color</label>

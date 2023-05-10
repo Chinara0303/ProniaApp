@@ -12,8 +12,6 @@ namespace ProniaApp.Models
         public int Rating { get; set; } = 5;
         public int SaleCount { get; set; } 
         public int StockCount { get; set; }
-        public string MainImage { get; set; }
-        public string HoverImage { get; set; }
         public int ColorId { get; set; }
         public Color Color { get; set; }
 

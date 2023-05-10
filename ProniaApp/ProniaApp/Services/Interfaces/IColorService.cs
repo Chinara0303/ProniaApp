@@ -7,5 +7,6 @@ namespace ProniaApp.Services.Interfaces
         Task<IEnumerable<Color>> GetAllAsync();
         Task<Color> GetByIdAsync(int? id);
         bool CheckByName(string name);
+        
     }
 }

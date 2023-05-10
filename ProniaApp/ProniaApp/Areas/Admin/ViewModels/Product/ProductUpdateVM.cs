@@ -11,20 +11,19 @@ namespace ProniaApp.Areas.Admin.ViewModels.Product
         public string SKU { get; set; }
 
         [Required(ErrorMessage = "Don`t be empty")]
+        public int  Rating { get; set; }
+
+        [Required(ErrorMessage = "Don`t be empty")]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Don`t be empty")]
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Don`t be empty")]
+        public int SaleCount { get; set; }
+
+        [Required(ErrorMessage = "Don`t be empty")]
         public int StockCount { get; set; }
-
-        public IFormFile MainPhoto { get; set; }
-        public string MainImage { get; set; }
-        public string HoverImage { get; set; }
-
-        public IFormFile HoverPhoto { get; set; }
-
         public List<IFormFile> Photos { get; set; }
         public ICollection<ProductImage> ProductImages { get; set; }
 

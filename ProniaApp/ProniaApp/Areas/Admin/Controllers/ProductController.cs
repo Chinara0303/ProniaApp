@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProniaApp.Areas.Admin.ViewModels.Product;
 using ProniaApp.Data;
@@ -36,7 +37,7 @@ namespace ProniaApp.Areas.Admin.Controllers
             _categoryService = categoryService;
         }
 
-        public async Task<IActionResult> Index(int page = 1,int take = 2)
+        public async Task<IActionResult> Index(int page = 1, int take = 5)
         {
             List<Product> datas = await _productService.GetPaginatedDatasAsync(page, take);
             List<ProductListVM> mappedDatas = GetDatas(datas);
@@ -62,7 +63,8 @@ namespace ProniaApp.Areas.Admin.Controllers
                     Id = product.Id,
                     Name = product.Name,
                     Price = product.Price,
-                    Mainmage = product.MainImage
+                    Images = product.ProductImages,
+                    SKU = product.SKU
                 };
                 mappedDatas.Add(productList);
             }
@@ -97,11 +99,11 @@ namespace ProniaApp.Areas.Admin.Controllers
                 List<ProductSize> productSizes = new();
                 List<ProductCategory> productCategories = new();
 
-                int canUploadImg = 5 -  model.Photos.Count;
+                int canUploadImg = 6 - model.Photos.Count;
 
-                if (model.Photos.Count() > canUploadImg)
+                if (canUploadImg < 0)
                 {
-                    ModelState.AddModelError("Photos", $"The maximum number of images you can upload is {canUploadImg}");
+                    ModelState.AddModelError("Photos", $"The maximum number of images you can upload is 6");
                     return View();
                 }
 
@@ -128,32 +130,8 @@ namespace ProniaApp.Areas.Admin.Controllers
                     productImages.Add(productImage);
                 }
                 newProduct.ProductImages = productImages;
-
-                if (!model.MainPhoto.CheckFileType("image/"))
-                {
-                    ModelState.AddModelError("MainPhoto", "File type must be image");
-                    return View();
-                }
-                if (!model.MainPhoto.CheckFileSize(200))
-                {
-                    ModelState.AddModelError("MainPhoto", "Image size must be max 200kb");
-                    return View();
-                }
-
-                newProduct.MainImage = model.MainPhoto.CreateFile(_env, "assets/images/website-images");
-
-                if (!model.HoverPhoto.CheckFileType("image/"))
-                {
-                    ModelState.AddModelError("HoverPhoto", "File type must be image");
-                    return View();
-                }
-                if (!model.MainPhoto.CheckFileSize(200))
-                {
-                    ModelState.AddModelError("HoverPhoto", "Image size must be max 200kb");
-                    return View();
-                }
-                newProduct.HoverImage = model.HoverPhoto.CreateFile(_env, "assets/images/website-images");
-
+                newProduct.ProductImages.FirstOrDefault().IsMain = true;
+                newProduct.ProductImages.Skip(1).FirstOrDefault().IsHover = true;
 
                 if (model.TagIds.Count > 0)
                 {
@@ -216,8 +194,10 @@ namespace ProniaApp.Areas.Admin.Controllers
                 newProduct.Description = model.Description;
                 newProduct.Price = convertedPrice;
                 newProduct.StockCount = model.StockCount;
-                newProduct.SKU = model.Name + "-" + random.Next();
+                newProduct.SKU = model.Name.Substring(0, 3) + "-" + random.Next();
                 newProduct.ColorId = model.ColorId;
+                newProduct.Rating = model.Rating;
+                newProduct.SaleCount = model.SaleCount;
 
                 await _crudService.CreateAsync(newProduct);
                 await _crudService.SaveAsync();
@@ -232,19 +212,19 @@ namespace ProniaApp.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Detail(int? id)
+        public async Task<IActionResult> Detail(int? id, int page)
         {
             try
             {
                 if (id is null) return BadRequest();
                 Product dbProduct = await _productService.GetFullDataByIdAsync((int)id);
                 if (dbProduct is null) return NotFound();
-
-
+                ViewBag.page = page;
 
                 ProductDetailVM model = new()
                 {
                     Id = dbProduct.Id,
+                    SKU = dbProduct.SKU,
                     Name = dbProduct.Name,
                     Description = dbProduct.Description,
                     Price = dbProduct.Price,
@@ -255,8 +235,7 @@ namespace ProniaApp.Areas.Admin.Controllers
                     TagNames = dbProduct.ProductTags,
                     SizeNames = dbProduct.ProductSizes,
                     ColorName = dbProduct.Color.Name,
-                    HoverImage = dbProduct.HoverImage,
-                    MainImage = dbProduct.MainImage,
+                    Rating = dbProduct.Rating,
                 };
                 return View(model);
             }
@@ -268,7 +247,7 @@ namespace ProniaApp.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, int page)
         {
             try
             {
@@ -280,6 +259,8 @@ namespace ProniaApp.Areas.Admin.Controllers
                 ViewBag.tags = await GetTagsAsync();
                 ViewBag.sizes = await GetSizesAsync();
                 ViewBag.categories = await GetCategoriesAsync();
+                ViewBag.page = page;
+
 
                 ProductUpdateVM model = new()
                 {
@@ -288,13 +269,12 @@ namespace ProniaApp.Areas.Admin.Controllers
                     Description = dbProduct.Description,
                     Price = dbProduct.Price,
                     SKU = dbProduct.SKU,
+                    Rating = dbProduct.Rating,
                     StockCount = dbProduct.StockCount,
                     ProductImages = dbProduct.ProductImages,
                     CategoryIds = dbProduct.ProductCategories.Select(c => c.Category.Id).ToList(),
                     TagIds = dbProduct.ProductTags.Select(t => t.Tag.Id).ToList(),
                     SizeIds = dbProduct.ProductSizes.Select(s => s.Size.Id).ToList(),
-                    MainImage = dbProduct.MainImage,
-                    HoverImage = dbProduct.HoverImage,
                     ColorId = dbProduct.ColorId
                 };
                 return View(model);
@@ -308,11 +288,10 @@ namespace ProniaApp.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, ProductUpdateVM model)
+        public async Task<IActionResult> Edit(int? id, int page, ProductUpdateVM model)
         {
             try
             {
-
                 ViewBag.colors = await GetColorsAsync();
                 ViewBag.tags = await GetTagsAsync();
                 ViewBag.sizes = await GetSizesAsync();
@@ -325,13 +304,11 @@ namespace ProniaApp.Areas.Admin.Controllers
                 if (!ModelState.IsValid)
                 {
                     model.ProductImages = dbProduct.ProductImages;
-                    model.MainImage = dbProduct.MainImage;
-                    model.HoverImage = dbProduct.HoverImage;
                     return View(dbProduct);
                 }
 
 
-                int canUploadImg = 5 - dbProduct.ProductImages.Count;
+                int canUploadImg = 6 - dbProduct.ProductImages.Count;
                 if (model.Photos is not null)
                 {
                     List<ProductImage> productImages = new();
@@ -340,8 +317,6 @@ namespace ProniaApp.Areas.Admin.Controllers
                     {
                         ModelState.AddModelError("Photos", $"The maximum number of images you can upload is {canUploadImg}");
                         model.ProductImages = dbProduct.ProductImages;
-                        model.MainImage = dbProduct.MainImage;
-                        model.HoverImage = dbProduct.HoverImage;
                         return View(model);
                     }
 
@@ -351,16 +326,12 @@ namespace ProniaApp.Areas.Admin.Controllers
                         {
                             ModelState.AddModelError("Photos", "File type must be image");
                             model.ProductImages = dbProduct.ProductImages;
-                            model.MainImage = dbProduct.MainImage;
-                            model.HoverImage = dbProduct.HoverImage;
                             return View(model);
                         }
                         if (!photo.CheckFileSize(200))
                         {
                             ModelState.AddModelError("Photos", "Image size must be max 200kb");
                             model.ProductImages = dbProduct.ProductImages;
-                            model.MainImage = dbProduct.MainImage;
-                            model.HoverImage = dbProduct.HoverImage;
                             return View(model);
                         }
                     }
@@ -374,62 +345,12 @@ namespace ProniaApp.Areas.Admin.Controllers
                         productImages.Add(productImage);
                     }
                     dbProduct.ProductImages = productImages;
+                    dbProduct.ProductImages.FirstOrDefault().IsMain = true;
+                    dbProduct.ProductImages.Skip(1).FirstOrDefault().IsHover = true;
                 }
                 else
                 {
                     model.ProductImages = dbProduct.ProductImages;
-                }
-
-                if (model.MainPhoto is not null)
-                {
-                    if (!model.MainPhoto.CheckFileType("image/"))
-                    {
-                        ModelState.AddModelError("MainPhoto", "File type must be image");
-                        model.ProductImages = dbProduct.ProductImages;
-                        model.MainImage = dbProduct.MainImage;
-                        model.HoverImage = dbProduct.HoverImage;
-                        return View(model);
-                    }
-                    if (!model.MainPhoto.CheckFileSize(200))
-                    {
-                        ModelState.AddModelError("MainPhoto", "Image size must be max 200kb");
-                        model.ProductImages = dbProduct.ProductImages;
-                        model.MainImage = dbProduct.MainImage;
-                        model.HoverImage = dbProduct.HoverImage;
-                        return View(model);
-                    }
-
-                    dbProduct.MainImage = model.MainPhoto.CreateFile(_env, "assets/images/website-images");
-                }
-                else
-                {
-                    model.MainImage = dbProduct.MainImage;
-                }
-
-                if (model.HoverPhoto is not null)
-                {
-
-                    if (!model.HoverPhoto.CheckFileType("image/"))
-                    {
-                        ModelState.AddModelError("HoverPhoto", "File type must be image");
-                        model.ProductImages = dbProduct.ProductImages;
-                        model.MainImage = dbProduct.MainImage;
-                        model.HoverImage = dbProduct.HoverImage;
-                        return View(model);
-                    }
-                    if (!model.MainPhoto.CheckFileSize(200))
-                    {
-                        ModelState.AddModelError("HoverPhoto", "Image size must be max 200kb");
-                        model.ProductImages = dbProduct.ProductImages;
-                        model.MainImage = dbProduct.MainImage;
-                        model.HoverImage = dbProduct.HoverImage;
-                        return View(dbProduct);
-                    }
-                    dbProduct.HoverImage = model.HoverPhoto.CreateFile(_env, "assets/images/website-images");
-                }
-                else
-                {
-                    model.HoverImage = dbProduct.HoverImage;
                 }
 
                 if (model.TagIds.Count > 0)
@@ -482,10 +403,11 @@ namespace ProniaApp.Areas.Admin.Controllers
                 dbProduct.Price = model.Price;
                 dbProduct.StockCount = model.StockCount;
                 dbProduct.ColorId = model.ColorId;
+                dbProduct.Rating = model.Rating;
 
                 await _crudService.SaveAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { page });
             }
             catch (Exception ex)
             {
@@ -503,10 +425,6 @@ namespace ProniaApp.Areas.Admin.Controllers
                 Product dbProduct = await _productService.GetByIdAsync((int)id);
                 if (dbProduct is null) return NotFound();
 
-                string MainImagePath = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", dbProduct.MainImage);
-                string HoverImagePath = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", dbProduct.HoverImage);
-                FileHelper.DeleteFile(MainImagePath);
-                FileHelper.DeleteFile(HoverImagePath);
                 foreach (var productImage in dbProduct.ProductImages)
                 {
                     string imagePath = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", productImage.ImgName);
@@ -535,13 +453,26 @@ namespace ProniaApp.Areas.Admin.Controllers
                 Product dbProduct = await _productService.GetProductByImageId((int)id);
                 if (dbProduct is null) return NotFound();
 
-                
-                string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", image.ImgName);
-                FileHelper.DeleteFile(path);
+                DeleteResponse response = new();
+                response.Result = false;
 
-                _productService.RemoveImage(image);
+                if (dbProduct.ProductImages.Count > 1)
+                {
+                    string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", image.ImgName);
+                    FileHelper.DeleteFile(path);
+                    _productService.RemoveImage(image);
+
+                    await _crudService.SaveAsync();
+                    response.Result = true;
+                }
+
+                dbProduct.ProductImages.FirstOrDefault().IsMain = true;
+
+                response.Id = dbProduct.ProductImages.FirstOrDefault().Id;
+
                 await _crudService.SaveAsync();
-                return Ok();
+
+                return Ok(response);
             }
             catch (Exception ex)
             {
@@ -550,6 +481,45 @@ namespace ProniaApp.Areas.Admin.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> SetStatus(int? id)
+        {
+            try
+            {
+                if (id == null) return BadRequest();
+
+                ProductImage image = await _productService.GetImageById((int)id);
+
+                if (image is null) return NotFound();
+
+                Product dbProduct = await _productService.GetProductByImageId((int)id);
+                if (dbProduct is null) return NotFound();
+
+                if (!image.IsMain)
+                {
+                    image.IsMain = true;
+                    await _crudService.SaveAsync();
+                }
+
+                var images = dbProduct.ProductImages.Where(m => m.Id != id).ToList();
+
+                foreach (var item in images)
+                {
+                    if (item.IsMain)
+                    {
+                        item.IsMain = false;
+                        await _crudService.SaveAsync();
+                    }
+                }
+
+                return Ok(image.IsMain);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.error = ex.Message;
+                return View();
+            }
+        }
         private async Task<SelectList> GetColorsAsync()
         {
             IEnumerable<Color> colors = await _colorService.GetAllAsync();

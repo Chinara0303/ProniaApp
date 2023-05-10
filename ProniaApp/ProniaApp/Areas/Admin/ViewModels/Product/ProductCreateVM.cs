@@ -17,13 +17,11 @@ namespace ProniaApp.Areas.Admin.ViewModels.Product
         public int SaleCount { get; set; }
 
         [Required(ErrorMessage = "Don`t be empty")]
+        public int Rating { get; set; }
+
+
+        [Required(ErrorMessage = "Don`t be empty")]
         public int StockCount { get; set; }
-
-        [Required(ErrorMessage = "Don`t be empty")]
-        public IFormFile MainPhoto { get; set; }
-
-        [Required(ErrorMessage = "Don`t be empty")]
-        public IFormFile HoverPhoto { get; set; }
 
         [Required(ErrorMessage = "Don`t be empty")]
         public List<IFormFile> Photos { get; set; }

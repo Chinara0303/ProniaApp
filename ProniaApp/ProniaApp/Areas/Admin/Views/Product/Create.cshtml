@@ -14,16 +14,6 @@
                         <span class="text-danger" asp-validation-for="Photos"></span>
                     </div>
                     <div class="form-group">
-                        <label>Main Image</label>
-                        <input class="form-control" asp-for="MainPhoto">
-                        <span class="text-danger" asp-validation-for="MainPhoto"></span>
-                    </div>
-                    <div class="form-group">
-                        <label> Hover Image</label>
-                        <input class="form-control" asp-for="HoverPhoto">
-                        <span class="text-danger" asp-validation-for="HoverPhoto"></span>
-                    </div>
-                    <div class="form-group">
                         <label>Title</label>
                         <input type="text" class="form-control" asp-for="Name">
                         <span class="text-danger" asp-validation-for="Name"></span>
@@ -42,6 +32,16 @@
                         <label>Stock Count</label>
                         <input class="form-control" asp-for="StockCount" type="number"/>
                         <span class="text-danger" asp-validation-for="StockCount"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Sale Count</label>
+                        <input class="form-control" asp-for="SaleCount" type="number" />
+                        <span class="text-danger" asp-validation-for="SaleCount"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <input class="form-control" asp-for="Rating"/>
+                        <span class="text-danger" asp-validation-for="Rating"></span>
                     </div>
                     <div class="form-group">
                         <label>Color</label>
