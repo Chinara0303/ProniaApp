@@ -39,7 +39,7 @@ namespace ProniaApp.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(int page = 1, int take = 5)
         {
-            List<Product> datas = await _productService.GetPaginatedDatasAsync(page, take);
+            List<Product> datas = await _productService.GetPaginatedDatasAsync(page, take,null,null,null);
             List<ProductListVM> mappedDatas = GetDatas(datas);
 
             int pageCount = await GetPageCountAsync(take);

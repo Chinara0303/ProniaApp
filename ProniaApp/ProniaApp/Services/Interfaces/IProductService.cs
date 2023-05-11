@@ -1,4 +1,5 @@
 ﻿using ProniaApp.Models;
+using ProniaApp.ViewModels.Shop;
 
 namespace ProniaApp.Services.Interfaces
 {
@@ -12,10 +13,14 @@ namespace ProniaApp.Services.Interfaces
         Task<Product> GetProductByImageId(int? id);
         void RemoveImage(ProductImage image);
         Task<int> GetCountAsync();
-        Task<List<Product>> GetPaginatedDatasAsync(int page,int take);
-        Task<List<Product>> GetProductsByCategoryIdAsync(int? id);
-        Task<List<Product>> GetProductsByColorIdAsync(int? id);
-        Task<List<Product>> GetProductsByTagIdAsync(int? id);
+        Task<List<Product>> GetPaginatedDatasAsync(int page,int take, int? categoryId, int? colorId, int? tagId);
+        Task<List<ProductVM>> GetProductsByCategoryIdAsync(int? id, int page, int take);
+        Task<List<ProductVM>> GetProductsByColorIdAsync(int? id);
+        Task<List<ProductVM>> GetProductsByTagIdAsync(int? id);
+        Task<IEnumerable<ProductVM>> GetDatasAsync();
 
+        Task<int> GetProductsCountByCategoryAsync(int? catId);
+        Task<int> GetProductsCountByColorAsync(int? colorId);
+        Task<int> GetProductsCountByTagAsync(int? tagid);
     }
 }

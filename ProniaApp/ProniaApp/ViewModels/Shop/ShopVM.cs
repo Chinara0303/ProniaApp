@@ -1,4 +1,5 @@
-﻿using ProniaApp.Models;
+﻿using ProniaApp.Helpers;
+using ProniaApp.Models;
 
 namespace ProniaApp.ViewModels.Shop
 {
@@ -8,5 +9,6 @@ namespace ProniaApp.ViewModels.Shop
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<Color> Colors { get; set; }
         public IEnumerable<Tag> Tags { get; set; }
+        public Paginate<ProductVM> PaginateDatas { get; set; }
     }
 }
