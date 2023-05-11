@@ -22,7 +22,6 @@
                                         <tr>
                                             <th>Image</th>
                                             <th>Title</th>
-                                            <th>Description</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
@@ -34,7 +33,6 @@
                                                     <div class="image"><img class="img-fluid" src="~/assets/images/website-images/@blog.BlogImages.Where(bi=>bi.IsMain).FirstOrDefault()?.ImgName" /></div>
                                                 </td>
                                                 <td>@blog.Title</td>
-                                                <td>@blog.Description</td>
                                                 <td>
                                                     <a asp-action="Detail" asp-route-id="@blog.Id" data-toggle="tooltip" data-original-title="Detail" class="detail">
                                                         <i class="fa-solid fa-circle-info" style="color: #d8d10e;"></i>

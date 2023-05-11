@@ -1,9 +1,8 @@
-﻿using ProniaApp.Models;
-
+﻿
 namespace ProniaApp.ViewModels.Home
 {
     public class HomeVM
     {
-        public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<ProniaApp.Models.Product> Products { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProniaApp.Areas.Admin.ViewModels.Category;
 using ProniaApp.Helpers;
 using ProniaApp.Models;
 using ProniaApp.Services.Interfaces;
+using ProniaApp.ViewModels.Product;
 using ProniaApp.ViewModels.Shop;
 
 namespace ProniaApp.Controllers
@@ -12,20 +14,25 @@ namespace ProniaApp.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IColorService _colorService;
         private readonly ITagService _tagService;
+        private readonly IAdvertService _advertService;
+        private readonly ILayoutService _layoutService;
         public ShopController(IProductService productService,
                               ICategoryService categoryService,
                               ITagService tagService,
-                              IColorService colorService)
+                              IColorService colorService,
+                              IAdvertService advertService,
+                              ILayoutService layoutService)
         {
             _productService = productService;
             _categoryService = categoryService;
             _tagService = tagService;
             _colorService = colorService;
+            _advertService = advertService;
+            _layoutService = layoutService;
         }
 
-        public async Task<IActionResult> Index(int page = 1,int take = 2, int? categoryId=null,int? colorId=null,int? tagId=null)
+        public async Task<IActionResult> Index(int page = 1,int take = 6, int? categoryId=null,int? colorId=null,int? tagId=null)
         {
-            
             List<Product> datas = await _productService.GetPaginatedDatasAsync(page, take,categoryId,colorId,tagId);
             List<ProductVM> mappedDatas = GetDatas(datas);
             int pageCount = 0;
@@ -37,8 +44,8 @@ namespace ProniaApp.Controllers
             if(colorId != null)
             {
                 pageCount = await GetPageCountAsync(take,null, colorId, null);
-
             }
+
             if (tagId != null)
             {
                 pageCount = await GetPageCountAsync(take, null, null, tagId);
@@ -61,7 +68,6 @@ namespace ProniaApp.Controllers
             return View(model);
         }
 
-
         private async Task<int> GetPageCountAsync(int take,int? catId,int? colorId,int? tagId)
         {
             int prodCount = 0;
@@ -72,22 +78,21 @@ namespace ProniaApp.Controllers
             }
             if(colorId is not null)
             {
-                prodCount = await _productService.GetProductsCountByColorAsync(catId);
+                prodCount = await _productService.GetProductsCountByColorAsync(colorId);
 
             }
             if (tagId is not null)
             {
-                prodCount = await _productService.GetProductsCountByTagAsync(catId);
+                prodCount = await _productService.GetProductsCountByTagAsync(tagId);
 
             }
-            else
+            if (catId == null && tagId == null && colorId == null)
             {
                 prodCount = await _productService.GetCountAsync();
             }
 
             return (int)Math.Ceiling((decimal)prodCount / take);
         }
-
        
         private List<ProductVM> GetDatas(List<Product> products)
         {
@@ -107,7 +112,7 @@ namespace ProniaApp.Controllers
             return mappedDatas;
         }
         [HttpGet]
-        public async Task<IActionResult> GetProductsByCategory(int? id,int page=1, int take=2)
+        public async Task<IActionResult> GetProductsByCategory(int? id,int page=1, int take=6)
         {
             if (id is null) return BadRequest();
             ViewBag.catId = id;
@@ -122,7 +127,7 @@ namespace ProniaApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProductsByColor(int? id,int page = 1, int take = 2)
+        public async Task<IActionResult> GetProductsByColor(int? id,int page = 1, int take = 6)
         {
             if (id is null) return BadRequest();
             ViewBag.colorId = id;
@@ -135,7 +140,7 @@ namespace ProniaApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProductsByTag(int? id, int page = 1, int take = 2)
+        public async Task<IActionResult> GetProductsByTag(int? id, int page = 1, int take = 6)
         {
             if (id is null) return BadRequest();
             ViewBag.tagId = id;
@@ -153,6 +158,41 @@ namespace ProniaApp.Controllers
         {
             var products = await _productService.GetDatasAsync();
             return PartialView("_ProductListPartial", products);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SingleProduct(int? id)
+        {
+            try
+            {
+                if (id is null) return BadRequest();
+                var dbProduct = await _productService.GetFullDataByIdAsync((int)id);
+                if (dbProduct is null) return NotFound();
+
+                SingleProductVM model = new()
+                {
+                    Name = dbProduct.Name,
+                    Price = dbProduct.Price,
+                    ProductCategories = dbProduct.ProductCategories,
+                    ProductTags = dbProduct.ProductTags,
+                    ProductImages = dbProduct.ProductImages,
+                    ProductSizes = dbProduct.ProductSizes,
+                    SKU = dbProduct.SKU,
+                    Rating = dbProduct.Rating,
+                    Description = dbProduct.Description,
+                    ColorName = dbProduct.Color.Name,
+                    Adverts = await _advertService.GetAllAsync(),
+                    SectionBgs = _layoutService.GetSectionBackgroundImages(),
+                    RelatedProducts = await _productService.GetRelatedProducts()
+                };
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.error = ex.Message;
+                return View();
+            }
         }
 
         [HttpPost]

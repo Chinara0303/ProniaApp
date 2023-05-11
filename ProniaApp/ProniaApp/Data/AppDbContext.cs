@@ -197,43 +197,49 @@ namespace ProniaApp.Data
             {
                 Id = 4,
                 Key = "ShopIntroBg",
-                Value = "1 - 1 - 1919x388.jpg"
+                Value = "1-1-1919x388.jpg"
             },
             new SectionBackgroundImage
             {
                 Id = 5,
                 Key = "BlogIntroBg",
-                Value = "1 - 1 - 1919x388.jpg"
+                Value = "1-1-1919x388.jpg"
             },
              new SectionBackgroundImage
              {
                  Id = 6,
                  Key = "AboutIntroBg",
-                 Value = "1 - 1 - 1919x388.jpg"
+                 Value = "1-1-1919x388.jpg"
              },
              new SectionBackgroundImage
              {
                  Id = 7,
                  Key = "ContactIntroBg",
-                 Value = "1 - 1 - 1919x388.jpg"
+                 Value = "1-1-1919x388.jpg"
              },
             new SectionBackgroundImage
             {
                 Id = 8,
                 Key = "ContactInfoBg",
-                Value = "1 - 1 - 370x500.jpg"
+                Value = "1-1-370x500.jpg"
             },
             new SectionBackgroundImage
             {
                 Id = 9,
                 Key = "CartIntroBg",
-                Value = "1 - 1 - 370x500.jpg"
+                Value = "1-1-370x500.jpg"
             },
             new SectionBackgroundImage
             {
                 Id = 10,
                 Key = "AccountIntroBg",
-                Value = "1 - 1 - 370x500.jpg"
+                Value = "1-1-370x500.jpg"
+            },
+            new SectionBackgroundImage
+            {
+                Id = 11,
+                Key = "SingleProductIntroBg",
+                Value = "1-1-1919x388.jpg"
             });
         }
 

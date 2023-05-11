@@ -23,7 +23,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\assets\images\breadcrumb\bg\" />
+    <Folder Include="wwwroot\assets\images\footer\bg\" />
     <Folder Include="wwwroot\assets\images\logo\" />
+    <Folder Include="wwwroot\assets\images\slider\bg\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\assets\images\website-images\1-1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

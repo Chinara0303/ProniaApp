@@ -19,7 +19,6 @@ namespace ProniaApp.Areas.Admin.ViewModels.Product
         [Required(ErrorMessage = "Don`t be empty")]
         public int Rating { get; set; }
 
-
         [Required(ErrorMessage = "Don`t be empty")]
         public int StockCount { get; set; }
 

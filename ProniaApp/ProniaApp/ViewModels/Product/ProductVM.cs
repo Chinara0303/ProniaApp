@@ -1,6 +1,6 @@
 ﻿using ProniaApp.Models;
 
-namespace ProniaApp.ViewModels.Shop
+namespace ProniaApp.ViewModels.Product
 {
     public class ProductVM
     {

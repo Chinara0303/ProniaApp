@@ -9,6 +9,7 @@ namespace ProniaApp.Services.Interfaces
         Task<IEnumerable<SectionHeader>> GetSectionsDatasAsync();
         Task<SectionHeader> GetSectionAsync(int? id);
         Task<IEnumerable<SectionBackgroundImage>> GetSectionBackgroundImageDatasAsync();
+        Dictionary<string,string> GetSectionBackgroundImages();
         Task<SectionBackgroundImage> GetSectionBackgroundImageByIdAsync(int? id);
 
 

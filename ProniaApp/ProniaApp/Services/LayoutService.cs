@@ -33,6 +33,11 @@ namespace ProniaApp.Services
             return await _context.SectionBackgroundImages.ToListAsync();
         }
 
+        public Dictionary<string, string> GetSectionBackgroundImages()
+        {
+            return _context.SectionBackgroundImages.AsEnumerable().ToDictionary(s => s.Key, s => s.Value);
+        }
+
         public async Task<IEnumerable<SectionHeader>> GetSectionsDatasAsync()
         {
             return await _context.SectionHeaders.ToListAsync();

@@ -7,7 +7,6 @@ namespace ProniaApp.Services.Interfaces
         Task<IEnumerable<Blog>> GetAllAsync();
         Task<Blog> GetByIdAsync(int? id);
         Task<Blog> GetByIdTrackAsync(int? id);
-
         Task<BlogImage> GetImageById(int? id);
 
         void RemoveImage(BlogImage img);

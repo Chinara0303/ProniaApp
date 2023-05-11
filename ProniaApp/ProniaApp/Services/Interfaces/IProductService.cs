@@ -1,5 +1,5 @@
 ﻿using ProniaApp.Models;
-using ProniaApp.ViewModels.Shop;
+using ProniaApp.ViewModels.Product;
 
 namespace ProniaApp.Services.Interfaces
 {
@@ -22,5 +22,6 @@ namespace ProniaApp.Services.Interfaces
         Task<int> GetProductsCountByCategoryAsync(int? catId);
         Task<int> GetProductsCountByColorAsync(int? colorId);
         Task<int> GetProductsCountByTagAsync(int? tagid);
+        Task<IEnumerable<Product>> GetRelatedProducts();
     }
 }

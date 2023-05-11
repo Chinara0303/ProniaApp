@@ -4,7 +4,7 @@
     <div class="col-md-4 col-sm-6">
         <div class="product-item">
             <div class="product-img">
-                <a href="single-product-variable.html">
+                <a asp-controller="Shop" asp-action="SingleProduct" asp-route-id="@product.Id">
                     <img class="primary-img"
                          src="~/assets/images/website-images/@product.ProductImages?.Where(p=>p.IsMain).FirstOrDefault()?.ImgName"
                          alt="Product Images" />

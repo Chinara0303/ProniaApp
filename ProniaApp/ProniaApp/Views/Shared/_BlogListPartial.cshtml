@@ -1,0 +1,37 @@
+﻿@model List<Blog>
+
+@foreach (var item in Model)
+{
+    <div class="col-md-6">
+        <div class="blog-item">
+            <div class="blog-content">
+                <div class="blog-meta">
+                    <ul>
+                        <li class="author">
+                            <a href="#">By: Admin</a>
+                        </li>
+                        <li class="date">@item.CreatedDate.ToString("dd MMMM yyyy")</li>
+                    </ul>
+                </div>
+                <h2 class="title">
+                    <a href="blog-detail.html">@item.Title</a>
+                </h2>
+                <p class="short-desc mb-7">
+                    @item.Description.Substring(0,100)
+                </p>
+            </div>
+            <div class="blog-img img-hover-effect">
+                <a href="blog-detail.html">
+                    <img class="img-full"
+                         src="~/assets/images/website-images/@item.BlogImages?.Where(bi=>bi.IsMain).FirstOrDefault()?.ImgName"
+                         alt="Blog Image" />
+                </a>
+                <div class="inner-btn-wrap">
+                    <a class="inner-btn" asp-controller="Blog" asp-action="SingleBlog" asp-route-id="@item.Id">
+                        <i class="pe-7s-link"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

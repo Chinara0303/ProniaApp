@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ProniaApp.Data;
 using ProniaApp.Models;
 using ProniaApp.Services.Interfaces;
-using ProniaApp.ViewModels.Shop;
+using ProniaApp.ViewModels.Product;
 
 namespace ProniaApp.Services
 {
@@ -142,7 +142,7 @@ namespace ProniaApp.Services
                 .FirstOrDefaultAsync(p => p.ProductImages.Any(p => p.Id == id));
         }
 
-        public async Task<List<ProductVM>> GetProductsByCategoryIdAsync(int? id, int page = 1, int take = 2)
+        public async Task<List<ProductVM>> GetProductsByCategoryIdAsync(int? id, int page = 1, int take = 6)
         {
             List<ProductVM> model = new();
             var products = await _context.ProductCategories
@@ -232,23 +232,31 @@ namespace ProniaApp.Services
                  .CountAsync();
         }
 
-        public async Task<int> GetProductsCountByColorAsync(int? colorId)
+        public async Task<int> GetProductsCountByColorAsync(int? id)
         {
             return await _context.Products
                    .Include(p => p.ProductImages)
                    .Include(c => c.Color)
-                   .Where(p => p.Color.Id == (int)colorId)
+                   .Where(p => p.Color.Id == (int)id)
                    .CountAsync();
         }
 
-        public async Task<int> GetProductsCountByTagAsync(int? tagid)
+        public async Task<int> GetProductsCountByTagAsync(int? id)
         {
             return await _context.ProductTags
                   .Include(p => p.Product)
                   .ThenInclude(p => p.ProductImages)
-                  .Where(pc => pc.Tag.Id == (int)tagid)
+                  .Where(pc => pc.Tag.Id == (int)id)
                   .Select(p => p.Product)
                   .CountAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetRelatedProducts()
+        {
+           return await _context.Products
+                .Include(p=>p.ProductImages)
+                .OrderByDescending(p=>p.Color.Name)
+                .ToListAsync();
         }
     }
 

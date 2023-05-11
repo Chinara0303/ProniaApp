@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ProniaApp.Areas.Admin.ViewModels.Blog;
+using ProniaApp.Areas.Admin.ViewModels.Category;
+using ProniaApp.Areas.Admin.ViewModels.Tag;
 using ProniaApp.Helpers;
 using ProniaApp.Models;
 using ProniaApp.Services;
 using ProniaApp.Services.Interfaces;
+using ProniaApp.ViewModels.Product;
 using System.Linq;
 
 namespace ProniaApp.Areas.Admin.Controllers
@@ -25,6 +29,7 @@ namespace ProniaApp.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
+           
             return View(await _blogService.GetAllAsync());
         }
 
@@ -162,6 +167,8 @@ namespace ProniaApp.Areas.Admin.Controllers
 
                     dbBlog.BlogImages.FirstOrDefault().IsMain = true;
                 }
+
+
                 Blog newBlog = new()
                 {
                     Id = model.Id,
