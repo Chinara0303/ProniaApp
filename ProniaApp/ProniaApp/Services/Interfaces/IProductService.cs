@@ -18,7 +18,6 @@ namespace ProniaApp.Services.Interfaces
         Task<List<ProductVM>> GetProductsByColorIdAsync(int? id);
         Task<List<ProductVM>> GetProductsByTagIdAsync(int? id);
         Task<IEnumerable<ProductVM>> GetDatasAsync();
-
         Task<int> GetProductsCountByCategoryAsync(int? catId);
         Task<int> GetProductsCountByColorAsync(int? colorId);
         Task<int> GetProductsCountByTagAsync(int? tagid);

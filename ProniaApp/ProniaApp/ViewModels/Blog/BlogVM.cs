@@ -1,16 +1,18 @@
 ﻿using ProniaApp.Helpers;
 using ProniaApp.Models;
-using ProniaApp.ViewModels.Product;
 
 namespace ProniaApp.ViewModels.Blog
 {
     public class BlogVM
     {
-        public List<ProniaApp.Models.Blog> Blogs { get; set; }
-        public ProniaApp.Models.Blog Blog { get; set; }
+        public List<Models.Blog> Blogs { get; set; }
+        public Models.Blog Blog { get; set; }
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<Color> Colors { get; set; }
         public IEnumerable<Tag> Tags { get; set; }
-        public Paginate<ProniaApp.Models.Blog> PaginateDatas { get; set; }
+        public IEnumerable<Models.Product> Products { get; set; }
+
+        public Paginate<Models.Blog> PaginateDatas { get; set; }
+        public Dictionary<string, string> SectionBgs { get; set; }
     }
 }

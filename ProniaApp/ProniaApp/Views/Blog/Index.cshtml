@@ -1,12 +1,13 @@
-﻿@model BlogVM
+﻿@model  BlogVM
 @{
     ViewData["Title"] = "Index";
+    int? sumOfProductsCountByCategory = 0;
 }
 
 <!-- Begin Main Content Area -->
 <main class="main-content">
     <div class="breadcrumb-area breadcrumb-height"
-         data-bg-image="~/assets/images/breadcrumb/bg/1-1-1919x388.jpg">
+         data-bg-image="/assets/images/website-images/@Model.SectionBgs["BlogIntroBg"]">
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col-lg-12">
@@ -14,7 +15,7 @@
                         <h2 class="breadcrumb-heading">Blog</h2>
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                                <a asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li>Blog Grid View</li>
                         </ul>
@@ -45,159 +46,68 @@
                                     <li>
                                         <a href="#">
                                             <i class="fa fa-chevron-right"></i>
-                                            All <span>(65)</span>
+                                            All 
+                                            @foreach (var item in Model.Categories)
+                                            {
+                                                sumOfProductsCountByCategory += item.ProductCategories?.Count();
+                                            }
+                                            <span>(@sumOfProductsCountByCategory)</span>
                                         </a>
+                                        
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-chevron-right"></i>
-                                            Bansai <span>(12)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-chevron-right"></i>
-                                            House Plants <span>(22)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-chevron-right"></i>
-                                            Indoor Living <span>(19)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-chevron-right"></i>
-                                            Perennnials <span>(17)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-chevron-right"></i>
-                                            Plant For Gift <span>(01)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-chevron-right"></i>
-                                            Garden Tools <span>(12)</span>
-                                        </a>
-                                    </li>
+
+                                    @foreach (var category in Model.Categories)
+                                    {
+                                        <li>
+                                            <a asp-controller="Shop" asp-action="Index" asp-route-categoryId="@category.Id" data-id="@category.Id" class="category">
+                                                <i class="fa fa-chevron-right"></i>
+                                                @category.Name
+                                                <span>(@category.ProductCategories?.Count())</span>
+                                            </a>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                             <div class="widgets-item">
                                 <h2 class="widgets-title mb-4">Recent Post</h2>
                                 <div class="swiper-container widgets-list-slider">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="widgets-list-item">
-                                                <div class="widgets-list-img">
-                                                    <a href="#">
-                                                        <img class="img-full"
-                                                             src="~/assets/images/website-images/1-1-310x220.jpg"
-                                                             alt="Blog Images" />
-                                                    </a>
-                                                </div>
-                                                <div class="widgets-list-content">
-                                                    <div class="widgets-meta">
-                                                        <ul>
-                                                            <li class="date">24 April 2021</li>
-                                                        </ul>
+                                        @foreach (var item in Model.Blogs.OrderByDescending(b=>b.CreatedDate))
+                                        {
+                                            <div class="swiper-slide">
+                                                <div class="widgets-list-item">
+                                                    <div class="widgets-list-img">
+                                                        <a href="#">
+                                                            <img class="img-full"
+                                                                 src="~/assets/images/website-images/@item.BlogImages?.Where(bi=>bi.IsMain).FirstOrDefault()?.ImgName"
+                                                                 alt="Blog Images" />
+                                                        </a>
                                                     </div>
-                                                    <h2 class="title mb-0">
-                                                        <a href="#">Lorem ipsum dolo conse tetur.</a>
-                                                    </h2>
+                                                    <div class="widgets-list-content">
+                                                        <div class="widgets-meta">
+                                                            <ul>
+                                                                <li class="date">@item.CreatedDate.ToString("dd MMMM yyyy")</li>
+                                                            </ul>
+                                                        </div>
+                                                        <h2 class="title mb-0">
+                                                            <a href="#">@item.Description.Substring(0,26)</a>
+                                                        </h2>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="widgets-list-item">
-                                                <div class="widgets-list-img">
-                                                    <a href="#">
-                                                        <img class="img-full"
-                                                             src="~/assets/images/website-images/1-2-310x220.jpg"
-                                                             alt="Blog Images" />
-                                                    </a>
-                                                </div>
-                                                <div class="widgets-list-content">
-                                                    <div class="widgets-meta">
-                                                        <ul>
-                                                            <li class="date">24 April 2021</li>
-                                                        </ul>
-                                                    </div>
-                                                    <h2 class="title mb-0">
-                                                        <a href="#">Lorem ipsum dolo conse tetur.</a>
-                                                    </h2>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="widgets-list-item">
-                                                <div class="widgets-list-img">
-                                                    <a href="#">
-                                                        <img class="img-full"
-                                                             src="~/assets/images/website-images/1-3-310x220.jpg"
-                                                             alt="Blog Images" />
-                                                    </a>
-                                                </div>
-                                                <div class="widgets-list-content">
-                                                    <div class="widgets-meta">
-                                                        <ul>
-                                                            <li class="date">24 April 2021</li>
-                                                        </ul>
-                                                    </div>
-                                                    <h2 class="title mb-0">
-                                                        <a href="#">Lorem ipsum dolo conse tetur.</a>
-                                                    </h2>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide without-border">
-                                            <div class="widgets-list-item">
-                                                <div class="widgets-list-img">
-                                                    <a href="#">
-                                                        <img class="img-full"
-                                                             src="~/assets/images/website-images/1-1-310x220.jpg"
-                                                             alt="Blog Images" />
-                                                    </a>
-                                                </div>
-                                                <div class="widgets-list-content">
-                                                    <div class="widgets-meta">
-                                                        <ul>
-                                                            <li class="date">24 April 2021</li>
-                                                        </ul>
-                                                    </div>
-                                                    <h2 class="title mb-0">
-                                                        <a href="#">Lorem ipsum dolo conse tetur.</a>
-                                                    </h2>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
                             <div class="widgets-item">
                                 <h2 class="widgets-title mb-4">Populer Tags</h2>
                                 <ul class="widgets-tag">
-                                    <li>
-                                        <a href="#">Fashion</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Organic</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Old Fashion</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Men</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fashion</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dress</a>
-                                    </li>
+                                    @foreach (var item in Model.Tags)
+                                    {
+                                        <li>
+                                            <a asp-controller="Shop" asp-action="Index" asp-route-tagId="@item.Id">@item.Name</a>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                         </div>
@@ -219,22 +129,22 @@
                 </div>
                 <div class="col-xl-9 col-lg-8 order-1">
                     <div class="blog-item-wrap row g-y-30">
-                       <partial name="_BlogListPartial" model="Model.Blogs"/>
+                       <partial name="_BlogListPartial" model="Model.PaginateDatas.Datas"/>
                     </div>
                     <div class="pagination-area">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-end">
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item  @(Model.PaginateDatas.HasPrevious ? " " : "d-none")">
+                                    <a class="page-link" asp-action="Index" asp-route-page="@(Model.PaginateDatas.CurrentPage - 1)" aria-label="Previous">&laquo;</a>
                                 </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+                                @for (int i = 1; i <= Model.PaginateDatas.TotalPage; i++)
+                                {
+                                    <li class="page-item  @(Model.PaginateDatas.CurrentPage == i ? "disabled" : "") ">
+                                        <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                    </li>
+                                }
+                                <li class="page-item  @(Model.PaginateDatas.HasNext ? " " : "d-none")">
+                                    <a class="page-link" asp-action="Index" asp-route-page="@(Model.PaginateDatas.CurrentPage + 1)" aria-label="Next">&raquo;</a>
                                 </li>
                             </ul>
                         </nav>

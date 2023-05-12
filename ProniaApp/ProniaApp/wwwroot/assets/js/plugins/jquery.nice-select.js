@@ -1,20 +1,19 @@
-/*  jQuery Nice Select - v1.1.0
+/*  jquery nice select - v1.1.0
     https://github.com/hernansartorio/jquery-nice-select
-    Made by Hernán Sartorio  */
+    made by hernán sartorio  */
  
 (function($) {
 
-  $.fn.niceSelect = function(method) {
-    
-    // Methods
-    if (typeof method == 'string') {      
-      if (method == 'update') {
+  $.fn.niceselect = function(method) {
+    // methods
+      if (typeof method == 'string') {   
+          if (method == 'update') {
         this.each(function() {
           var $select = $(this);
           var $dropdown = $(this).next('.nice-select');
-          var open = $dropdown.hasClass('open');
+          var open = $dropdown.hasclass('open');
           
-          if ($dropdown.length) {
+            if ($dropdown.length) {
             $dropdown.remove();
             create_nice_select($select);
             
@@ -23,42 +22,43 @@
             }
           }
         });
-      } else if (method == 'destroy') {
+          } else if (method == 'destroy') {
         this.each(function() {
           var $select = $(this);
           var $dropdown = $(this).next('.nice-select');
           
-          if ($dropdown.length) {
+            if ($dropdown.length) {
             $dropdown.remove();
             $select.css('display', '');
           }
         });
-        if ($('.nice-select').length == 0) {
+              if ($('.nice-select').length == 0) {
           $(document).off('.nice_select');
         }
       } else {
-        console.log('Method "' + method + '" does not exist.')
+        console.log('method "' + method + '" does not exist.')
       }
       return this;
     }
       
-    // Hide native select
+    // hide native select
     this.hide();
     
-    // Create custom markup
+    // create custom markup
     this.each(function() {
       var $select = $(this);
       
-      if (!$select.next().hasClass('nice-select')) {
+        if (!$select.next().hasclass('nice-select')) {
+          
         create_nice_select($select);
       }
     });
     
     function create_nice_select($select) {
       $select.after($('<div></div>')
-        .addClass('nice-select')
-        .addClass($select.attr('class') || '')
-        .addClass($select.attr('disabled') ? 'disabled' : '')
+        .addclass('nice-select')
+        .addclass($select.attr('class') || '')
+        .addclass($select.attr('disabled') ? 'disabled' : '')
         .attr('tabindex', $select.attr('disabled') ? null : '0')
         .html('<span class="current"></span><ul class="list"></ul>')
       );
@@ -76,7 +76,7 @@
         $dropdown.find('ul').append($('<li></li>')
           .attr('data-value', $option.val())
           .attr('data-display', (display || null))
-          .addClass('option' +
+          .addclass('option' +
             ($option.is(':selected') ? ' selected' : '') +
             ($option.is(':disabled') ? ' disabled' : ''))
           .html($option.text())
@@ -84,41 +84,41 @@
       });
     }
     
-    /* Event listeners */
+    /* event listeners */
     
-    // Unbind existing events in case that the plugin has been initialized before
+    // unbind existing events in case that the plugin has been initialized before
     $(document).off('.nice_select');
     
-    // Open/close
+    // open/close
     $(document).on('click.nice_select', '.nice-select', function(event) {
       var $dropdown = $(this);
       
-      $('.nice-select').not($dropdown).removeClass('open');
-      $dropdown.toggleClass('open');
+      $('.nice-select').not($dropdown).removeclass('open');
+      $dropdown.toggleclass('open');
       
-      if ($dropdown.hasClass('open')) {
+      if ($dropdown.hasclass('open')) {
         $dropdown.find('.option');  
-        $dropdown.find('.focus').removeClass('focus');
-        $dropdown.find('.selected').addClass('focus');
+        $dropdown.find('.focus').removeclass('focus');
+        $dropdown.find('.selected').addclass('focus');
       } else {
         $dropdown.focus();
       }
     });
     
-    // Close when clicking outside
+    // close when clicking outside
     $(document).on('click.nice_select', function(event) {
       if ($(event.target).closest('.nice-select').length === 0) {
-        $('.nice-select').removeClass('open').find('.option');  
+        $('.nice-select').removeclass('open').find('.option');  
       }
     });
     
-    // Option click
+    // option click
     $(document).on('click.nice_select', '.nice-select .option:not(.disabled)', function(event) {
       var $option = $(this);
       var $dropdown = $option.closest('.nice-select');
       
-      $dropdown.find('.selected').removeClass('selected');
-      $option.addClass('selected');
+      $dropdown.find('.selected').removeclass('selected');
+      $option.addclass('selected');
       
       var text = $option.data('display') || $option.text();
       $dropdown.find('.current').text(text);
@@ -126,65 +126,65 @@
       $dropdown.prev('select').val($option.data('value')).trigger('change');
     });
 
-    // Keyboard events
+    // keyboard events
     $(document).on('keydown.nice_select', '.nice-select', function(event) {    
       var $dropdown = $(this);
       var $focused_option = $($dropdown.find('.focus') || $dropdown.find('.list .option.selected'));
       
-      // Space or Enter
-      if (event.keyCode == 32 || event.keyCode == 13) {
-        if ($dropdown.hasClass('open')) {
+      // space or enter
+      if (event.keycode == 32 || event.keycode == 13) {
+        if ($dropdown.hasclass('open')) {
           $focused_option.trigger('click');
         } else {
           $dropdown.trigger('click');
         }
         return false;
-      // Down
-      } else if (event.keyCode == 40) {
-        if (!$dropdown.hasClass('open')) {
+      // down
+      } else if (event.keycode == 40) {
+        if (!$dropdown.hasclass('open')) {
           $dropdown.trigger('click');
         } else {
-          var $next = $focused_option.nextAll('.option:not(.disabled)').first();
+          var $next = $focused_option.nextall('.option:not(.disabled)').first();
           if ($next.length > 0) {
-            $dropdown.find('.focus').removeClass('focus');
-            $next.addClass('focus');
+            $dropdown.find('.focus').removeclass('focus');
+            $next.addclass('focus');
           }
         }
         return false;
-      // Up
-      } else if (event.keyCode == 38) {
-        if (!$dropdown.hasClass('open')) {
+      // up
+      } else if (event.keycode == 38) {
+        if (!$dropdown.hasclass('open')) {
           $dropdown.trigger('click');
         } else {
-          var $prev = $focused_option.prevAll('.option:not(.disabled)').first();
+          var $prev = $focused_option.prevall('.option:not(.disabled)').first();
           if ($prev.length > 0) {
-            $dropdown.find('.focus').removeClass('focus');
-            $prev.addClass('focus');
+            $dropdown.find('.focus').removeclass('focus');
+            $prev.addclass('focus');
           }
         }
         return false;
-      // Esc
-      } else if (event.keyCode == 27) {
-        if ($dropdown.hasClass('open')) {
+      // esc
+      } else if (event.keycode == 27) {
+        if ($dropdown.hasclass('open')) {
           $dropdown.trigger('click');
         }
-      // Tab
-      } else if (event.keyCode == 9) {
-        if ($dropdown.hasClass('open')) {
+      // tab
+      } else if (event.keycode == 9) {
+        if ($dropdown.hasclass('open')) {
           return false;
         }
       }
     });
 
-    // Detect CSS pointer-events support, for IE <= 10. From Modernizr.
-    var style = document.createElement('a').style;
-    style.cssText = 'pointer-events:auto';
-    if (style.pointerEvents !== 'auto') {
-      $('html').addClass('no-csspointerevents');
+    // detect css pointer-events support, for ie <= 10. from modernizr.
+    var style = document.createelement('a').style;
+    style.csstext = 'pointer-events:auto';
+    if (style.pointerevents !== 'auto') {
+      $('html').addclass('no-csspointerevents');
     }
     
     return this;
 
   };
 
-}(jQuery));
+}(jquery));

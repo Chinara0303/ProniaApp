@@ -37,6 +37,9 @@ namespace ProniaApp.Data
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductComment> ProductComments { get; set; }
+        public DbSet<BlogComment> BlogComments { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -61,6 +64,9 @@ namespace ProniaApp.Data
             modelBuilder.Entity<SectionBackgroundImage>().HasQueryFilter(p => !p.SoftDelete);
             modelBuilder.Entity<SectionHeader>().HasQueryFilter(p => !p.SoftDelete);
             modelBuilder.Entity<Advert>().HasQueryFilter(p => !p.SoftDelete);
+            modelBuilder.Entity<BlogComment>().HasQueryFilter(p => !p.SoftDelete);
+            modelBuilder.Entity<ProductComment>().HasQueryFilter(p => !p.SoftDelete);
+            modelBuilder.Entity<Contact>().HasQueryFilter(p => !p.SoftDelete);
 
             modelBuilder.Entity<Setting>().HasData(
             new Setting
@@ -221,19 +227,19 @@ namespace ProniaApp.Data
             {
                 Id = 8,
                 Key = "ContactInfoBg",
-                Value = "1-1-370x500.jpg"
+                Value = "1-1-1919x388.jpg"
             },
             new SectionBackgroundImage
             {
                 Id = 9,
                 Key = "CartIntroBg",
-                Value = "1-1-370x500.jpg"
+                Value = "1-1-1919x388.jpg"
             },
             new SectionBackgroundImage
             {
                 Id = 10,
                 Key = "AccountIntroBg",
-                Value = "1-1-370x500.jpg"
+                Value = "1-1-1919x388.jpg"
             },
             new SectionBackgroundImage
             {

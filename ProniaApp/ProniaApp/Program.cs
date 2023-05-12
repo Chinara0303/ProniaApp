@@ -4,7 +4,7 @@ using ProniaApp.Data;
 using ProniaApp.Models;
 using ProniaApp.Services.Interfaces;
 using ProniaApp.Services;
-using Org.BouncyCastle.Asn1.X509.Qualified;
+using ProniaApp.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +47,12 @@ builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ILayoutService, LayoutService>();
 builder.Services.AddScoped(typeof(ICrudService<>), typeof(CrudService<>));
+
+builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("EmailSettings"));
+
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.AddScoped<EmailSetting>();
 
 var app = builder.Build();
 

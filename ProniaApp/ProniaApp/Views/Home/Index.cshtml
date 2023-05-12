@@ -610,7 +610,7 @@
                     @foreach (var product in Model.Products.OrderByDescending(p=>p.CreatedDate).Take(8)){
                             <div class="swiper-slide product-item">
                                 <div class="product-img">
-                                    <a href="shop.html">
+                                    <a asp-controller="Shop" asp-action="Index">
                                         <img class="primary-img"
                                              src="~/assets/images/website-images//@product.ProductImages.Where(p=>p.IsMain).FirstOrDefault().ImgName"
                                              alt="Product Images" />

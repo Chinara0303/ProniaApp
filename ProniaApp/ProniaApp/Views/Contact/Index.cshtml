@@ -1,4 +1,5 @@
-﻿
+﻿@model ContactVM
+@inject UserManager<AppUser> userManager;
 @{
     ViewData["Title"] = "Index";
 }
@@ -14,7 +15,7 @@
                         <h2 class="breadcrumb-heading">Contact</h2>
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                                <a asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li>Contact Us</li>
                         </ul>
@@ -50,50 +51,109 @@
                                 </li>
                             </ul>
                         </div>
-                        <form id="contact-form"
-                              class="contact-form"
-                              action="https://whizthemes.com/mail-php/mamunur/pronia/pronia.php">
-                            <div class="group-input">
-                                <div class="form-field me-lg-30 mb-35 mb-lg-0">
-                                    <input type="text"
-                                           name="con_firstName"
-                                           placeholder="First Name*"
-                                           class="input-field" />
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form id="contact-form"
+                                  class="contact-form"
+                                  method="post" asp-action="PostComment">
+                                <div class="group-input">
+                                    <div class="form-field me-lg-30 mb-35 mb-lg-0">
+                                        <input type="text"
+                                               placeholder="First Name*"
+                                               readonly
+                                               class="input-field"
+                                               value="@userManager.Users.FirstOrDefault(u=>u.UserName==User.Identity.Name).FirstName"/>
+                                    </div>
+                                    <div class="form-field mb-35">
+                                        <input type="text"
+                                               placeholder="Last Name*"
+                                               readonly
+                                               class="input-field"
+                                               value="@userManager.Users.FirstOrDefault(u=>u.UserName==User.Identity.Name).LastName" />
+                                    </div>
                                 </div>
-                                <div class="form-field mb-35">
-                                    <input type="text"
-                                           name="con_lastName"
-                                           placeholder="Last Name*"
-                                           class="input-field" />
+                                <div class="group-input mb-35">
+                                    <div class="form-field me-lg-30 mb-35 mb-lg-0">
+                                        <input type="text"
+                                               placeholder="Phone*"
+                                               class="input-field"
+                                               readonly
+                                              asp-for="Phone" />
+                                    </div>
+                                    <div class="form-field">
+                                        <input type="text"
+                                               placeholder="Email*"
+                                               class="input-field"
+                                               readonly
+                                               value="@userManager.Users.FirstOrDefault(u=>u.UserName==User.Identity.Name).Email" /> />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="group-input mb-35">
-                                <div class="form-field me-lg-30 mb-35 mb-lg-0">
-                                    <input type="text"
-                                           name="con_phone"
-                                           placeholder="Phone*"
-                                           class="input-field" />
+                                <div class="form-field mb-5">
+                                    <textarea 
+                                              placeholder="Message"
+                                              class="textarea-field"
+                                          asp-for="Message">
+                                          </textarea>
                                 </div>
-                                <div class="form-field">
-                                    <input type="text"
-                                           name="con_email"
-                                           placeholder="Email*"
-                                           class="input-field" />
+                                <div class="contact-button-wrap">
+                                    <button type="submit"
+                                            class="btn btn btn-custom-size xl-size btn-pronia-primary">
+                                        Post Comment
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="form-field mb-5">
-                                <textarea name="con_message"
-                                          placeholder="Message"
-                                          class="textarea-field"></textarea>
-                            </div>
-                            <div class="contact-button-wrap">
-                                <button type="submit"
-                                        class="btn btn btn-custom-size xl-size btn-pronia-primary">
-                                    Post Comment
-                                </button>
-                            </div>
-                            <p class="form-message mt-3 mb-0"></p>
-                        </form>
+                                <p class="form-message mt-3 mb-0"></p>
+                            </form>
+                        }
+                        else
+                        {
+                            <form id="contact-form"
+                                  class="contact-form"
+                                  method="post" asp-action="PostComment">
+                                <div class="group-input">
+                                    <div class="form-field me-lg-30 mb-35 mb-lg-0">
+                                        <input type="text"
+                                               placeholder="First Name*"
+                                               class="input-field"
+                                           asp-for="FirstName" />
+                                    </div>
+                                    <div class="form-field mb-35">
+                                        <input type="text"
+                                               placeholder="Last Name*"
+                                               class="input-field"
+                                           asp-for="LastName" />
+                                    </div>
+                                </div>
+                                <div class="group-input mb-35">
+                                    <div class="form-field me-lg-30 mb-35 mb-lg-0">
+                                        <input type="text"
+                                               placeholder="Phone*"
+                                               class="input-field"
+                                           asp-for="Phone" />
+                                    </div>
+                                    <div class="form-field">
+                                        <input type="text"
+                                               placeholder="Email*"
+                                               class="input-field"
+                                           asp-for="Email" />
+                                    </div>
+                                </div>
+                                <div class="form-field mb-5">
+                                    <textarea 
+                                              placeholder="Message"
+                                              class="textarea-field"
+                                          asp-for="Message">
+                                          </textarea>
+                                </div>
+                                <div class="contact-button-wrap">
+                                    <button type="submit"
+                                            class="btn btn btn-custom-size xl-size btn-pronia-primary">
+                                        Post Comment
+                                    </button>
+                                </div>
+                                <p class="form-message mt-3 mb-0"></p>
+                            </form>
+                        }
+                      
                     </div>
                 </div>
             </div>

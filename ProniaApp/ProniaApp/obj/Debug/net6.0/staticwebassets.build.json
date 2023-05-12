@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0BP0jyJFGJr6vKrJIJXAS2jmC1CulPjjbL/SKHKhMPQ=",
+  "Hash": "vKpow2OAMo8TqbxipkmRR7UPeozASdkklnFweVjE/TI=",
   "Source": "ProniaApp",
   "BasePath": "_content/ProniaApp",
   "Mode": "Default",
@@ -19888,6 +19888,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\templates\\verify.html",
+      "SourceId": "ProniaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
+      "BasePath": "_content/ProniaApp",
+      "RelativePath": "templates/verify.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\templates\\verify.html"
     }
   ]
 }

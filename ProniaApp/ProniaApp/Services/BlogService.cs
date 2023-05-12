@@ -2,6 +2,7 @@
 using ProniaApp.Data;
 using ProniaApp.Models;
 using ProniaApp.Services.Interfaces;
+using System.Linq;
 
 namespace ProniaApp.Services
 {
@@ -39,9 +40,23 @@ namespace ProniaApp.Services
 
         }
 
+        public async Task<int> GetCountAsync()
+        {
+            return await _context.Blogs.CountAsync();
+        }
+
         public async Task<BlogImage> GetImageById(int? id)
         {
             return await _context.BlogImages.FirstOrDefaultAsync(b=>b.Id == id);
+        }
+
+        public async Task<List<Blog>> GetPaginatedDatasAsync(int page = 1, int take = 2)
+        {
+            return await _context.Blogs
+                .Include(b => b.BlogImages)
+                .Skip((page * take) - take)
+                .Take(take)
+                .ToListAsync();
         }
 
         public void RemoveImage(BlogImage img)

@@ -8,9 +8,10 @@ namespace ProniaApp.Services.Interfaces
         Task<Blog> GetByIdAsync(int? id);
         Task<Blog> GetByIdTrackAsync(int? id);
         Task<BlogImage> GetImageById(int? id);
-
         void RemoveImage(BlogImage img);
         Task<Blog> GetBlogByImageId(int? id);
         void AddRangeToBlog(List<BlogImage> images);
+        Task<List<Blog>> GetPaginatedDatasAsync(int page, int take);
+        Task<int> GetCountAsync();
     }
 }

@@ -6,7 +6,6 @@ namespace ProniaApp.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
-        public ICollection<Comment> Comments { get; set; }
+        public bool IsRemember { get; set; }
     }
 }

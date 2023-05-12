@@ -170,9 +170,9 @@
                             </li>
                             <li class="short">
                                 <select class="nice-select">
-                                    <option value="1">Sort by Default</option>
-                                    <option value="2">Sort by Popularity</option>
-                                    <option value="3">Sort by Rated</option>
+                                    <option><a asp-route-value="Sort by Rated" asp-controller="Shop" asp-action="Filter">Sort by Rated</a> </option>
+                                    <option><a asp-route-value="Sort by Popularity" asp-controller="Shop" asp-action="Filter">Sort by Popularity</a></option>
+                                    <option value="3">Sort by Default</option>
                                     <option value="4">Sort by Latest</option>
                                     <option value="5">Sort by High Price</option>
                                     <option value="6">Sort by Low Price</option>
@@ -276,24 +276,6 @@
                             </div>
                         </div>
                     </div>
-                   @* <div class="pagination-area">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item  @(Model.PaginateDatas.HasPrevious ? " " : "d-none")">
-                                    <a class="page-link" asp-action="Index" asp-route-page="@(Model.PaginateDatas.CurrentPage - 1)" aria-label="Previous">&laquo;</a>
-                                </li>
-                                @for (int i = 1; i <= Model.PaginateDatas.TotalPage; i++)
-                                {
-                                    <li class="page-item  @(Model.PaginateDatas.CurrentPage == i ? "disabled" : "") ">
-                                        <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
-                                    </li>
-                                }
-                                <li class="page-item  @(Model.PaginateDatas.HasNext ? " " : "d-none")">
-                                    <a class="page-link" asp-action="Index" asp-route-page="@(Model.PaginateDatas.CurrentPage + 1)" aria-label="Next">&raquo;</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>*@
                 </div>
             </div>
         </div>

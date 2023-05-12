@@ -304,7 +304,7 @@ namespace ProniaApp.Areas.Admin.Controllers
                 if (!ModelState.IsValid)
                 {
                     model.ProductImages = dbProduct.ProductImages;
-                    return View(dbProduct);
+                    return View(model);
                 }
 
 
@@ -539,7 +539,6 @@ namespace ProniaApp.Areas.Admin.Controllers
         {
             IEnumerable<Category> categories = await _categoryService.GetAllAsync();
             return new SelectList(categories, "Id", "Name");
-
         }
 
 

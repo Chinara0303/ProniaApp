@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProniaApp.Areas.Admin.ViewModels.Category;
 using ProniaApp.Helpers;
 using ProniaApp.Models;
@@ -15,13 +16,15 @@ namespace ProniaApp.Controllers
         private readonly IColorService _colorService;
         private readonly ITagService _tagService;
         private readonly IAdvertService _advertService;
+        private readonly ICrudService<ProductComment> _crudService;
         private readonly ILayoutService _layoutService;
         public ShopController(IProductService productService,
                               ICategoryService categoryService,
                               ITagService tagService,
                               IColorService colorService,
                               IAdvertService advertService,
-                              ILayoutService layoutService)
+                              ILayoutService layoutService,
+                              ICrudService<ProductComment> crudService)
         {
             _productService = productService;
             _categoryService = categoryService;
@@ -29,6 +32,7 @@ namespace ProniaApp.Controllers
             _colorService = colorService;
             _advertService = advertService;
             _layoutService = layoutService;
+            _crudService = crudService;
         }
 
         public async Task<IActionResult> Index(int page = 1,int take = 6, int? categoryId=null,int? colorId=null,int? tagId=null)
@@ -36,6 +40,8 @@ namespace ProniaApp.Controllers
             List<Product> datas = await _productService.GetPaginatedDatasAsync(page, take,categoryId,colorId,tagId);
             List<ProductVM> mappedDatas = GetDatas(datas);
             int pageCount = 0;
+            ViewBag.catId = categoryId;
+            ViewBag.tagId = tagId;
 
             if(categoryId != null)
             {
@@ -50,6 +56,7 @@ namespace ProniaApp.Controllers
             {
                 pageCount = await GetPageCountAsync(take, null, null, tagId);
             }
+
             if(categoryId == null && tagId==null && colorId == null)
             {
                 pageCount = await GetPageCountAsync(take,null,null,null);
@@ -74,7 +81,6 @@ namespace ProniaApp.Controllers
             if (catId is not null)
             {
                  prodCount = await _productService.GetProductsCountByCategoryAsync(catId);
-
             }
             if(colorId is not null)
             {
@@ -144,6 +150,7 @@ namespace ProniaApp.Controllers
         {
             if (id is null) return BadRequest();
             ViewBag.tagId = id;
+
             var products = await _productService.GetProductsByTagIdAsync(id);
 
             int pageCount = await GetPageCountAsync(take, null, null, (int)id);
@@ -171,7 +178,8 @@ namespace ProniaApp.Controllers
 
                 SingleProductVM model = new()
                 {
-                    Name = dbProduct.Name,
+                    Id = dbProduct.Id,
+                    ProductName = dbProduct.Name,
                     Price = dbProduct.Price,
                     ProductCategories = dbProduct.ProductCategories,
                     ProductTags = dbProduct.ProductTags,
@@ -183,7 +191,8 @@ namespace ProniaApp.Controllers
                     ColorName = dbProduct.Color.Name,
                     Adverts = await _advertService.GetAllAsync(),
                     SectionBgs = _layoutService.GetSectionBackgroundImages(),
-                    RelatedProducts = await _productService.GetRelatedProducts()
+                    RelatedProducts = await _productService.GetRelatedProducts(),
+                    ProductCommentVM = new(),
                 };
 
                 return View(model);
@@ -195,6 +204,26 @@ namespace ProniaApp.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> PostComment(SingleProductVM model, int? id,string userId)
+        {
+            if (id is null || userId == null) return BadRequest();
+            if (!ModelState.IsValid) return RedirectToAction(nameof(SingleProduct), new {id});
+
+            ProductComment productComment = new()
+            {
+                Name = model.ProductCommentVM.Name,
+                Email = model.ProductCommentVM.Email,
+                Subject = model.ProductCommentVM.Subject,
+                Message = model.ProductCommentVM.Message,
+                AppUserId = userId,
+                ProductId = (int)id
+            };
+            await _crudService.CreateAsync(productComment);
+            return RedirectToAction(nameof(SingleProduct), new {id});
+        }
         [HttpPost]
         public async Task<IActionResult> Filter(string value)
         {

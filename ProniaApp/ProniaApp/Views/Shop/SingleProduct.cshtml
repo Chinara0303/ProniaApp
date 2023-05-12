@@ -1,4 +1,5 @@
 ﻿@model SingleProductVM
+@inject UserManager<AppUser> userManager
 @{
     ViewData["Title"] = "SingleProduct";
 }
@@ -42,15 +43,15 @@
                         </div>
                         <div class="thumbs-arrow-holder">
                             <div class="swiper-container single-product-thumbs">
-                                   <div class="swiper-wrapper">
-                                @foreach (var productImage in Model.ProductImages)
-                                {
-                                    <a href="#" class="swiper-slide">
-                                        <img class="img-full"
-                                                src="~/assets/images/website-images/@productImage.ImgName"
-                                                alt="Product Thumnail" />
-                                    </a>
-                                }
+                                <div class="swiper-wrapper">
+                                    @foreach (var productImage in Model.ProductImages)
+                                    {
+                                        <a href="#" class="swiper-slide">
+                                            <img class="img-full"
+                                                 src="~/assets/images/website-images/@productImage.ImgName"
+                                                 alt="Product Thumnail" />
+                                        </a>
+                                    }
                                 </div>
                                 <!-- Add Arrows -->
                                 <div class="thumbs-button-wrap d-none d-md-block">
@@ -67,7 +68,7 @@
                 </div>
                 <div class="col-lg-6 pt-5 pt-lg-0">
                     <div class="single-product-content">
-                        <h2 class="title">@Model.Name</h2>
+                        <h2 class="title">@Model.ProductName</h2>
                         <div class="price-box">
                             <span class="new-price">$@Model.Price</span>
                         </div>
@@ -91,7 +92,7 @@
                         <div class="selector-wrap color-option">
                             <span class="selector-title border-bottom-0">Color</span>
                             <select class="nice-select wide border-bottom-0 rounded-0">
-                                    <option value="@Model.ColorName">@Model.ColorName</option>
+                                <option value="@Model.ColorName">@Model.ColorName</option>
                             </select>
                         </div>
                         <div class="selector-wrap size-option">
@@ -99,8 +100,8 @@
                             <select class="nice-select wide rounded-0">
                                 @foreach (var item in Model.ProductSizes)
                                 {
-                                 <option value="@item.Size.Name">@item.Size.Name</option>
-                                }    
+                                    <option value="@item.Size.Id">@item.Size.Name</option>
+                                }
                             </select>
                         </div>
                         <p class="short-desc">
@@ -132,21 +133,21 @@
                         <ul class="service-item-wrap">
                             @foreach (var item in Model.Adverts)
                             {
-                            <li class="service-item">
-                                <div class="service-img">
-                                    <img src="~/assets/images/website-images/@item.Image"
-                                         alt="Shipping Icon" />
-                                </div>
-                                <div class="service-content">
-                                    <span class="title">
-                                        @item.Title
-                                        
-                                    </span>
-                                </div>
-                            </li>
-                                
-                            }  
-                            
+                                <li class="service-item">
+                                    <div class="service-img">
+                                        <img src="~/assets/images/website-images/@item.Image"
+                                             alt="Shipping Icon" />
+                                    </div>
+                                    <div class="service-content">
+                                        <span class="title">
+                                            @item.Title
+
+                                        </span>
+                                    </div>
+                                </li>
+
+                            }
+
                         </ul>
                         <div class="product-category">
                             <span class="title">SKU:</span>
@@ -159,7 +160,7 @@
                         <div class="product-category">
                             <span class="title">Categories :</span>
                             <ul>
-                                 @foreach (var item in Model.ProductCategories)
+                                @foreach (var item in Model.ProductCategories)
                                 {
                                     <li>
                                         <a href="#">@string.Join("," , item.Category.Name)</a>
@@ -170,7 +171,7 @@
                         <div class="product-category product-tags">
                             <span class="title">Tags :</span>
                             <ul>
-                               @foreach (var item in Model.ProductTags)
+                                @foreach (var item in Model.ProductTags)
                                 {
                                     <li>
                                         <a href="#">@item.Tag.Name</a>
@@ -383,44 +384,54 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="feedback-area">
-                                    <h2 class="heading">Leave a comment</h2>
-                                    <form class="feedback-form" action="#">
-                                        <div class="group-input">
-                                            <div class="form-field me-md-30 mb-30 mb-md-0">
-                                                <input type="text"
-                                                       name="name"
-                                                       placeholder="Your Name*"
-                                                       class="input-field" />
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <div class="feedback-area">
+                                        <h2 class="heading">Leave a comment</h2>
+                                        <form class="feedback-form" method="post" asp-action="PostComment" asp-route-id="@Model.Id" asp-route-userId="@userManager.Users.FirstOrDefault(u=>u.UserName==User.Identity.Name).Id">
+                                            <div class="group-input">
+                                                <div class="form-field me-md-30 mb-30 mb-md-0">
+                                                    <input 
+                                                           placeholder="Your Name*"
+                                                           class="input-field"
+                                                           readonly
+                                                           value="@string.Join(" ", userManager.Users.FirstOrDefault(u=>u.UserName==User.Identity.Name).FirstName,userManager.Users.FirstOrDefault(u=>u.UserName==User.Identity.Name).LastName)"
+                                                           asp-for="ProductCommentVM.Name"/>
+                                                            
+                                                       </div>
+                                                <div class="form-field">
+                                                    <input
+                                                           placeholder="Your Email*"
+                                                           class="input-field"
+                                                           readonly
+                                                      value="@userManager.Users.FirstOrDefault(u=>u.UserName==User.Identity.Name).Email"
+                                                      asp-for="ProductCommentVM.Email"/>
+                                                </div>
                                             </div>
-                                            <div class="form-field">
-                                                <input type="text"
-                                                       name="email"
-                                                       placeholder="Your Email*"
-                                                       class="input-field" />
+                                            <div class="form-field mt-30">
+                                                <input 
+                                                       placeholder="Subject (Optinal)"
+                                                       class="input-field"
+                                                   asp-for="ProductCommentVM.Subject" />
                                             </div>
-                                        </div>
-                                        <div class="form-field mt-30">
-                                            <input type="text"
-                                                   name="subject"
-                                                   placeholder="Subject (Optinal)"
-                                                   class="input-field" />
-                                        </div>
-                                        <div class="form-field mt-30">
-                                            <textarea name="message"
-                                                      placeholder="Message"
-                                                      class="textarea-field"></textarea>
-                                        </div>
-                                        <div class="button-wrap pt-5">
-                                            <button type="submit"
-                                                    value="submit"
-                                                    class="btn btn-custom-size xl-size btn-pronia-primary"
-                                                    name="submit">
-                                                Post Comment
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                                            <div class="form-field mt-30">
+                                                <textarea 
+                                                          placeholder="Message"
+                                                          class="textarea-field"
+                                                      asp-for="ProductCommentVM.Message"></textarea>
+                                            </div>
+                                            <div class="button-wrap pt-5">
+                                                <button type="submit"
+                                                        class="btn btn-custom-size xl-size btn-pronia-primary">
+                                                    Post Comment
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -453,7 +464,7 @@
                                                  alt="Product Images" />
                                             <img class="secondary-img"
                                                  src="~/assets/images/website-images/@item.ProductImages.Where(p=>p.IsHover).FirstOrDefault()?.ImgName
-                                                 alt="Product Images" />
+                                             alt="Product Images" />
                                         </a>
                                         <div class="product-add-action">
                                             <ul>
@@ -516,8 +527,8 @@
                                     </div>
                                 </div>
                             }
-                           
-                           
+
+
                         </div>
                     </div>
                 </div>
