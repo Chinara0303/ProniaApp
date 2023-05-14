@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using ProniaApp.Areas.Admin.ViewModels.Category;
 using ProniaApp.Helpers;
 using ProniaApp.Models;
 using ProniaApp.Services.Interfaces;
+using ProniaApp.ViewModels.Cart;
 using ProniaApp.ViewModels.Product;
 using ProniaApp.ViewModels.Shop;
 
@@ -12,6 +14,7 @@ namespace ProniaApp.Controllers
     public class ShopController : Controller
     {
         private readonly IProductService _productService;
+        private readonly ICartService _cartService;
         private readonly ICategoryService _categoryService;
         private readonly IColorService _colorService;
         private readonly ITagService _tagService;
@@ -24,7 +27,8 @@ namespace ProniaApp.Controllers
                               IColorService colorService,
                               IAdvertService advertService,
                               ILayoutService layoutService,
-                              ICrudService<ProductComment> crudService)
+                              ICrudService<ProductComment> crudService,
+                              ICartService cartService)
         {
             _productService = productService;
             _categoryService = categoryService;
@@ -33,23 +37,24 @@ namespace ProniaApp.Controllers
             _advertService = advertService;
             _layoutService = layoutService;
             _crudService = crudService;
+            _cartService = cartService;
         }
 
-        public async Task<IActionResult> Index(int page = 1,int take = 6, int? categoryId=null,int? colorId=null,int? tagId=null)
+        public async Task<IActionResult> Index(int page = 1, int take = 6, int? categoryId = null, int? colorId = null, int? tagId = null)
         {
-            List<Product> datas = await _productService.GetPaginatedDatasAsync(page, take,categoryId,colorId,tagId);
+            List<Product> datas = await _productService.GetPaginatedDatasAsync(page, take, categoryId, colorId, tagId);
             List<ProductVM> mappedDatas = GetDatas(datas);
             int pageCount = 0;
             ViewBag.catId = categoryId;
             ViewBag.tagId = tagId;
 
-            if(categoryId != null)
+            if (categoryId != null)
             {
-                 pageCount = await GetPageCountAsync(take,categoryId,null,null);
+                pageCount = await GetPageCountAsync(take, categoryId, null, null);
             }
-            if(colorId != null)
+            if (colorId != null)
             {
-                pageCount = await GetPageCountAsync(take,null, colorId, null);
+                pageCount = await GetPageCountAsync(take, null, colorId, null);
             }
 
             if (tagId != null)
@@ -57,9 +62,9 @@ namespace ProniaApp.Controllers
                 pageCount = await GetPageCountAsync(take, null, null, tagId);
             }
 
-            if(categoryId == null && tagId==null && colorId == null)
+            if (categoryId == null && tagId == null && colorId == null)
             {
-                pageCount = await GetPageCountAsync(take,null,null,null);
+                pageCount = await GetPageCountAsync(take, null, null, null);
             }
 
             Paginate<ProductVM> paginatedDatas = new(mappedDatas, page, pageCount);
@@ -75,14 +80,14 @@ namespace ProniaApp.Controllers
             return View(model);
         }
 
-        private async Task<int> GetPageCountAsync(int take,int? catId,int? colorId,int? tagId)
+        private async Task<int> GetPageCountAsync(int take, int? catId, int? colorId, int? tagId)
         {
             int prodCount = 0;
             if (catId is not null)
             {
-                 prodCount = await _productService.GetProductsCountByCategoryAsync(catId);
+                prodCount = await _productService.GetProductsCountByCategoryAsync(catId);
             }
-            if(colorId is not null)
+            if (colorId is not null)
             {
                 prodCount = await _productService.GetProductsCountByColorAsync(colorId);
 
@@ -99,7 +104,7 @@ namespace ProniaApp.Controllers
 
             return (int)Math.Ceiling((decimal)prodCount / take);
         }
-       
+
         private List<ProductVM> GetDatas(List<Product> products)
         {
             List<ProductVM> mappedDatas = new();
@@ -118,22 +123,22 @@ namespace ProniaApp.Controllers
             return mappedDatas;
         }
         [HttpGet]
-        public async Task<IActionResult> GetProductsByCategory(int? id,int page=1, int take=6)
+        public async Task<IActionResult> GetProductsByCategory(int? id, int page = 1, int take = 6)
         {
             if (id is null) return BadRequest();
             ViewBag.catId = id;
 
-            var products = await _productService.GetProductsByCategoryIdAsync(id,page,take);
+            var products = await _productService.GetProductsByCategoryIdAsync(id, page, take);
 
-            int pageCount =await GetPageCountAsync(take, (int)id, null, null);
+            int pageCount = await GetPageCountAsync(take, (int)id, null, null);
 
             Paginate<ProductVM> model = new(products, page, pageCount);
-          
+
             return PartialView("_ProductListPartial", model);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProductsByColor(int? id,int page = 1, int take = 6)
+        public async Task<IActionResult> GetProductsByColor(int? id, int page = 1, int take = 6)
         {
             if (id is null) return BadRequest();
             ViewBag.colorId = id;
@@ -193,6 +198,7 @@ namespace ProniaApp.Controllers
                     SectionBgs = _layoutService.GetSectionBackgroundImages(),
                     RelatedProducts = await _productService.GetRelatedProducts(),
                     ProductCommentVM = new(),
+                    ProductComments = dbProduct.ProductComments
                 };
 
                 return View(model);
@@ -207,10 +213,10 @@ namespace ProniaApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> PostComment(SingleProductVM model, int? id,string userId)
+        public async Task<IActionResult> PostComment(SingleProductVM model, int? id, string userId)
         {
             if (id is null || userId == null) return BadRequest();
-            if (!ModelState.IsValid) return RedirectToAction(nameof(SingleProduct), new {id});
+            if (!ModelState.IsValid) return RedirectToAction(nameof(SingleProduct), new { id });
 
             ProductComment productComment = new()
             {
@@ -222,8 +228,9 @@ namespace ProniaApp.Controllers
                 ProductId = (int)id
             };
             await _crudService.CreateAsync(productComment);
-            return RedirectToAction(nameof(SingleProduct), new {id});
+            return RedirectToAction(nameof(SingleProduct), new { id });
         }
+
         [HttpPost]
         public async Task<IActionResult> Filter(string value)
         {
@@ -253,6 +260,39 @@ namespace ProniaApp.Controllers
                     break;
             }
             return PartialView("_ProductListPartial", products);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToCart(int? id)
+        {
+            if (id is null) return BadRequest();
+
+            Product dbProduct = await _productService.GetByIdAsync((int)id);
+
+            if (dbProduct == null) return NotFound();
+
+            List<CartVM> carts = _cartService.GetDatasFromCookie();
+
+            CartVM existProduct = carts.FirstOrDefault(p => p.ProductId == id);
+
+            _cartService.SetDatasToCookie(carts, dbProduct, existProduct);
+
+            List<CartDetailVM> cartDetailVMs = new();
+
+            CartDetailVM model = new()
+            {
+                Id = dbProduct.Id,
+                Name = dbProduct.Name,
+                Image = dbProduct.ProductImages.Where(pi => pi.IsMain).FirstOrDefault().ImgName,
+                Count = carts.Count,
+                Price = dbProduct.Price,
+                Total = dbProduct.Price * carts.Count,
+            };
+
+            cartDetailVMs.Add(model);
+
+            return PartialView("_CartDetailPartial", cartDetailVMs);
 
         }
     }

@@ -67,7 +67,9 @@ namespace ProniaApp.Services
 
         public async Task<Product> GetFullDataByIdAsync(int? id)
         {
-            return await _context.Products.Include(p => p.ProductImages)
+            return await _context.Products
+               .Include(p => p.ProductImages)
+               .Include(p=>p.ProductComments)
                .Include(p => p.ProductCategories)
                .ThenInclude(pc => pc.Category)
                .Include(p => p.ProductTags)

@@ -1,4 +1,7 @@
 ﻿@model ShopVM
+@inject ILayoutService layout
+@inject IBannerService banner
+
 @{
     ViewData["Title"] = "Index";
     int? sumOfProductsCountByCategory = 0;
@@ -8,7 +11,7 @@
 <!-- Begin Main Content Area -->
 <main class="main-content">
     <div class="breadcrumb-area breadcrumb-height"
-         data-bg-image="/assets/images/breadcrumb/bg/1-1-1919x388.jpg">
+         data-bg-image="/assets/images/website-images/@layout.GetSectionBackgroundImages()["ShopIntroBg"]">
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col-lg-12">
@@ -125,12 +128,12 @@
                         </div>
                         <div class="banner-item widgets-banner img-hover-effect">
                             <div class="banner-img">
-                                <img src="~/assets/images/website-images/1-270x300.webp"
+                                <img src="~/assets/images/website-images/@banner.GetAllAsync().Result.Where(b=>!b.IsLarge).FirstOrDefault().Image"
                                      alt="Banner Image" />
                             </div>
                             <div class="banner-content text-position-center">
-                                <span class="collection">New Collection</span>
-                                <h3 class="title">Plant Port</h3>
+                                <span class="collection">@Html.Raw(banner.GetAllAsync().Result.Where(b=>!b.IsLarge).FirstOrDefault().SubTitle)</span>
+                                <h3 class="title">@Html.Raw(banner.GetAllAsync().Result.Where(b=>!b.IsLarge).FirstOrDefault().Title)</h3>
                                 <div class="button-wrap">
                                     <a class="btn btn-custom-size sm-size btn-pronia-primary"
                                        href="#">Shop Now</a>
@@ -224,11 +227,7 @@
                                                     </ul>
                                                 </div>
                                                 <p class="short-desc mb-0">
-                                                    Proin nec ligula dolor. Mauris mollis turpis vitae
-                                                    viverra viverra. Mauris at lacus commodo, dictum
-                                                    eros in, interdum diam. Sed lorem orci, maximus
-                                                    nec efficitur, mattis sed tortor. Voluptates
-                                                    repudiandae nulla rhoncus varius eget id eros.
+                                                    @product.Description.Substring(0,100)
                                                 </p>
                                                 <div class="product-add-action">
                                                     <ul>

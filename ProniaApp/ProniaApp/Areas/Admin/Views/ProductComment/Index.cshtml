@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ProductComment>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Css{
+    <link rel="stylesheet" href="~/admin/assets/css/index.css">
+}
+
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            @if (Model.Count() > 0)
+                            {
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Product name</th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var category in Model)
+                                        {
+                                            <tr data-id="@category.Id">
+                                                <td>@category.Name</td>
+                                                <td>
+                                                    <a asp-action="Edit" asp-route-id="@category.Id" data-toggle="tooltip" data-original-title="Edit" class="edit">
+                                                        <i class="fa-solid fa-pen-to-square" style="color: #2bca16;"></i>
+                                                    </a>
+                                                    <a class="delete" data-toggle="tooltip" data-original-title="Remove">
+                                                        <i class="fa-solid fa-trash" style="color: #c81921;"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Script{
+    <script src="~/admin/assets/js/index.js"></script>
+}
+

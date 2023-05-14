@@ -40,8 +40,10 @@ namespace ProniaApp.Data
         public DbSet<ProductComment> ProductComments { get; set; }
         public DbSet<BlogComment> BlogComments { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-
-
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartProduct> CartProducts { get; set; }
+        
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -67,6 +69,9 @@ namespace ProniaApp.Data
             modelBuilder.Entity<BlogComment>().HasQueryFilter(p => !p.SoftDelete);
             modelBuilder.Entity<ProductComment>().HasQueryFilter(p => !p.SoftDelete);
             modelBuilder.Entity<Contact>().HasQueryFilter(p => !p.SoftDelete);
+            modelBuilder.Entity<Cart>().HasQueryFilter(p => !p.SoftDelete);
+            modelBuilder.Entity<CartProduct>().HasQueryFilter(p => !p.SoftDelete);
+
 
             modelBuilder.Entity<Setting>().HasData(
             new Setting
@@ -227,7 +232,7 @@ namespace ProniaApp.Data
             {
                 Id = 8,
                 Key = "ContactInfoBg",
-                Value = "1-1-1919x388.jpg"
+                Value = "1-1-370x500.jpg"
             },
             new SectionBackgroundImage
             {
@@ -246,7 +251,20 @@ namespace ProniaApp.Data
                 Id = 11,
                 Key = "SingleProductIntroBg",
                 Value = "1-1-1919x388.jpg"
-            });
+            },
+             new SectionBackgroundImage
+             {
+                 Id = 12,
+                 Key = "TestimonialBg",
+                 Value = "1-1-1820x443.jpg"
+                
+             },
+              new SectionBackgroundImage
+              {
+                  Id = 13,
+                  Key = "AboutItemBg",
+                  Value = "3-1-1208x542.jpg"
+              });
         }
 
     }

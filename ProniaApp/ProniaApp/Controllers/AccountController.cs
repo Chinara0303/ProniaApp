@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using NuGet.Common;
+using ProniaApp.Data;
 using ProniaApp.Helpers;
 using ProniaApp.Models;
 using ProniaApp.Services.Interfaces;
 using ProniaApp.ViewModels.Account;
+using ProniaApp.ViewModels.Cart;
 
 namespace ProniaApp.Controllers
 {
@@ -13,14 +17,21 @@ namespace ProniaApp.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IEmailService _emailService;
+        private readonly ICartService _cartService ;
+        private readonly ICrudService<Cart> _crudService;
 
         public AccountController(UserManager<AppUser> userManager,
                                     SignInManager<AppUser> signInManager,
-                                    IEmailService emailService)
+                                    IEmailService emailService,
+                                    ICartService cartService,
+                                    ICrudService<Cart> crudService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailService = emailService;
+            _cartService = cartService;
+            _crudService = crudService;
+
         }
         public IActionResult Index()
         {
@@ -71,6 +82,8 @@ namespace ProniaApp.Controllers
 
                 _emailService.Send(newUser.Email, subject, html);
 
+
+
                 return RedirectToAction(nameof(VerifyEmail));
 
             }
@@ -90,6 +103,29 @@ namespace ProniaApp.Controllers
             await _userManager.ConfirmEmailAsync(user, token);
 
             await _signInManager.SignInAsync(user, user.IsRemember);
+
+            Cart dbCart = await _cartService.GetByUserIdAsync(userId);
+
+            if(dbCart is null)
+            {
+                dbCart = new()
+                {
+                    AppUserId = userId,
+                    CartProducts = new List<CartProduct>()
+                };
+            }
+
+            List<CartProduct> carts = await _cartService.GetAllByCartIdAsync(dbCart.Id);
+
+            List<CartVM> cartVMs = new();
+            CartVM cart = new CartVM()
+            {
+                ProductId = carts.FirstOrDefault().ProductId,
+                Count = carts.Count
+            };
+            cartVMs.Add(cart);
+
+            Response.Cookies.Append("basket", JsonConvert.SerializeObject(cartVMs));
 
             return RedirectToAction("Index", "Home");
         }
@@ -133,11 +169,35 @@ namespace ProniaApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout(string userId)
         {
             await _signInManager.SignOutAsync();
+
+            List<CartVM> carts = _cartService.GetDatasFromCookie();
+            Cart dbCart = await _cartService.GetByUserIdAsync(userId);
+
+            if (dbCart == null)
+            {
+                dbCart = new()
+                {
+                    AppUserId = userId,
+                    CartProducts = new List<CartProduct>()
+                };
+            }
+            foreach (var cart in carts)
+            {
+                dbCart.CartProducts.Add(new CartProduct()
+                {
+                    ProductId = cart.ProductId,
+                    CartId = dbCart.Id,
+                    Count = cart.Count
+                });
+            }
+
+            await _crudService.CreateAsync(dbCart);
+            Response.Cookies.Delete("basket");
+
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

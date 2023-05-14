@@ -26,8 +26,6 @@ namespace ProniaApp.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-
-
             return View(await _layoutService.GetSectionsDatasAsync());
         }
 

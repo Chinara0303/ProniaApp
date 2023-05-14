@@ -86,7 +86,14 @@
                                 </ul>
                             </div>
                             <div class="review-status">
-                                <a href="#">( 1 Review )</a>
+                                @if(Model.ProductComments.Count == 0)
+                                {
+                                    <a href="#">( 0 Review )</a>
+                                }
+                                else
+                                {
+                                <a href="#">( @Model.ProductComments.Count Review )</a>
+                                }
                             </div>
                         </div>
                         <div class="selector-wrap color-option">
@@ -116,8 +123,7 @@
                                 </div>
                             </li>
                             <li class="add-to-cart">
-                                <a class="btn btn-custom-size lg-size btn-pronia-primary"
-                                   href="cart.html">Add to cart</a>
+                              <a data-id="@Model.Id" class="add-to-cart-btn btn btn-custom-size lg-size btn-pronia-primary">Add to cart</a>
                             </li>
                             <li class="wishlist-btn-wrap">
                                 <a class="custom-circle-btn" href="wishlist.html">
@@ -141,13 +147,10 @@
                                     <div class="service-content">
                                         <span class="title">
                                             @item.Title
-
                                         </span>
                                     </div>
                                 </li>
-
                             }
-
                         </ul>
                         <div class="product-category">
                             <span class="title">SKU:</span>
@@ -263,15 +266,16 @@
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="tab-btn"
-                               id="reviews-tab"
-                               data-bs-toggle="tab"
-                               href="#reviews"
-                               role="tab"
-                               aria-controls="reviews"
-                               aria-selected="false">
-                                Reviews(3)
-                            </a>
+                                <a class="tab-btn"
+                                   id="reviews-tab"
+                                   data-bs-toggle="tab"
+                                   href="#reviews"
+                                   role="tab"
+                                   aria-controls="reviews"
+                                   aria-selected="false">
+                                    Reviews( @Model.ProductComments.Count )
+                                </a>
+                           
                         </li>
                     </ul>
                     <div class="tab-content product-tab-content">
@@ -321,68 +325,23 @@
                              aria-labelledby="reviews-tab">
                             <div class="product-review-body">
                                 <div class="blog-comment mt-0">
-                                    <h4 class="heading">Comments (03)</h4>
-                                    <div class="blog-comment-item">
-                                        <div class="blog-comment-img">
-                                            <img src="assets/images/website-images/1-1-120x120.webp"
-                                                 alt="User Image" />
-                                        </div>
-                                        <div class="blog-comment-content">
-                                            <div class="user-meta">
-                                                <h2 class="user-name">Donald Chavez</h2>
-                                                <span class="date">21 July 2021</span>
+                                      <h4 class="heading">Comments (@Model.ProductComments.Count)</h4>
+                                    @foreach (var item in Model.ProductComments)
+                                    {
+                                        <div class="blog-comment-item">
+                                            <div class="blog-comment-content">
+                                                <div class="user-meta">
+                                                    <h2 class="user-name">@item.Name</h2>
+                                                    <span class="date">@item.CreatedDate.ToString("dd MMMM yyyy")</span>
+                                                </div>
+                                                <p class="user-comment">
+                                                   @item.Message
+                                                </p>
                                             </div>
-                                            <p class="user-comment">
-                                                Lorem ipsum dolor sit amet, consectetur adipisi
-                                                elit, sed do eiusmod tempor incidid ut labore etl
-                                                dolore magna aliqua. Ut enim ad minim veniam, quis
-                                                nostrud exercitati ullamco laboris nisi ut
-                                                aliquiex ea commodo consequat.
-                                            </p>
-                                            <a class="btn btn-custom-size comment-btn" href="#">Reply</a>
                                         </div>
-                                    </div>
-                                    <div class="blog-comment-item relpy-item">
-                                        <div class="blog-comment-img">
-                                            <img src="assets/images/website-images/1-2-120x120.webp"
-                                                 alt="User Image" />
-                                        </div>
-                                        <div class="blog-comment-content">
-                                            <div class="user-meta">
-                                                <h2 class="user-name">Marissa Swan</h2>
-                                                <span class="date">21 July 2021</span>
-                                            </div>
-                                            <p class="user-comment">
-                                                Lorem ipsum dolor sit amet, consectetur adipisi
-                                                elit, sed do eiusmod tempr incidid ut labore etl
-                                                dolore magna aliqua. Ut enim ad minim veniam,
-                                                quisnos exercitati ullamco laboris nisi ut
-                                                aliquiex.
-                                            </p>
-                                            <a class="btn btn-custom-size comment-btn style-2"
-                                               href="#">Reply</a>
-                                        </div>
-                                    </div>
-                                    <div class="blog-comment-item">
-                                        <div class="blog-comment-img">
-                                            <img src="assets/images/website-images/1-3-120x120.webp"
-                                                 alt="User Image" />
-                                        </div>
-                                        <div class="blog-comment-content">
-                                            <div class="user-meta">
-                                                <h2 class="user-name">Donald Chavez</h2>
-                                                <span class="date">21 July 2021</span>
-                                            </div>
-                                            <p class="user-comment">
-                                                Lorem ipsum dolor sit amet, consectetur adipisi
-                                                elit, sed do eiusmod tempor incidid ut labore etl
-                                                dolore magna aliqua. Ut enim ad minim veniam, quis
-                                                nostrud exercitati ullamco laboris nisi ut
-                                                aliquiex ea commodo consequat.
-                                            </p>
-                                            <a class="btn btn-custom-size comment-btn" href="#">Reply</a>
-                                        </div>
-                                    </div>
+                                    }
+                                    
+                                   
                                 </div>
 
                                 @if (User.Identity.IsAuthenticated)
@@ -493,7 +452,8 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="cart.html"
+                                                    <a 
+                                                        class="add-to-cart-btn"
                                                        data-tippy="Add to cart"
                                                        data-tippy-inertia="true"
                                                        data-tippy-animation="shift-away"
@@ -538,3 +498,6 @@
     <!-- Product Area End Here -->
 </main>
 <!-- Main Content Area End Here  -->
+@section Scripts{
+    <script src="~/assets/js/index.js"></script>
+}

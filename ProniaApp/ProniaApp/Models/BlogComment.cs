@@ -8,7 +8,7 @@
         public string Email { get; set; }
         public int BlogId { get; set; }
         public Blog Blog { get; set; }
-        public int AppUserId { get; set; }
+        public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
     }
 }

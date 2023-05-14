@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vKpow2OAMo8TqbxipkmRR7UPeozASdkklnFweVjE/TI=",
+  "Hash": "xUDuMUzOLhKxP3K6JaxjKIoXphcQTc9/qHlFkW3ByBA=",
   "Source": "ProniaApp",
   "BasePath": "_content/ProniaApp",
   "Mode": "Default",
@@ -11560,23 +11560,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\banner\\2-3-570x235.jpg"
     },
     {
-      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\banner\\3-1-1208x542.jpg",
-      "SourceId": "ProniaApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
-      "BasePath": "_content/ProniaApp",
-      "RelativePath": "assets/images/banner/3-1-1208x542.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\banner\\3-1-1208x542.jpg"
-    },
-    {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\banner\\4-1-1170x400.jpg",
       "SourceId": "ProniaApp",
       "SourceType": "Discovered",
@@ -11915,23 +11898,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\brand\\bg\\1-1170x300.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\contact\\1-1-370x500.jpg",
-      "SourceId": "ProniaApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
-      "BasePath": "_content/ProniaApp",
-      "RelativePath": "assets/images/contact/1-1-370x500.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\contact\\1-1-370x500.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\error-404\\404.png",
@@ -13124,23 +13090,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\0dccf193-ffac-4b1f-bfb0-84f30deefb5acourse_6.jpg"
     },
     {
-      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\0e202a98-7cdc-4126-a475-5865ab91dd971-1-570x633.jpg",
-      "SourceId": "ProniaApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
-      "BasePath": "_content/ProniaApp",
-      "RelativePath": "assets/images/website-images/0e202a98-7cdc-4126-a475-5865ab91dd971-1-570x633.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\0e202a98-7cdc-4126-a475-5865ab91dd971-1-570x633.jpg"
-    },
-    {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\0e8b8d69-0b36-4f5e-8c3b-19c012ed5072laptop (1).png",
       "SourceId": "ProniaApp",
       "SourceType": "Discovered",
@@ -13396,40 +13345,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\1-1170x300.jpg"
     },
     {
-      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\1-1-1820x443.jpg",
-      "SourceId": "ProniaApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
-      "BasePath": "_content/ProniaApp",
-      "RelativePath": "assets/images/website-images/1-1-1820x443.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\1-1-1820x443.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\1-1-1919x388.jpg",
-      "SourceId": "ProniaApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
-      "BasePath": "_content/ProniaApp",
-      "RelativePath": "assets/images/website-images/1-1-1919x388.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\1-1-1919x388.jpg"
-    },
-    {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\1-1-270x300.jpg",
       "SourceId": "ProniaApp",
       "SourceType": "Discovered",
@@ -13479,6 +13394,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\1-1-310x220.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\1-1-370x500.jpg",
+      "SourceId": "ProniaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
+      "BasePath": "_content/ProniaApp",
+      "RelativePath": "assets/images/website-images/1-1-370x500.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\1-1-370x500.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\1-1-524x617.png",
@@ -14790,6 +14722,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\30869eda-632d-46dc-869e-bdbeae6cb929laptop (1).png"
     },
     {
+      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\3-1-1208x542.jpg",
+      "SourceId": "ProniaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
+      "BasePath": "_content/ProniaApp",
+      "RelativePath": "assets/images/website-images/3-1-1208x542.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\3-1-1208x542.jpg"
+    },
+    {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\32319bcc-1799-43ac-97a6-1dc77c88ecf51-1.png",
       "SourceId": "ProniaApp",
       "SourceType": "Discovered",
@@ -15351,6 +15300,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\5885fb30-4fbc-4571-b656-d970b991354acourse_6.jpg"
     },
     {
+      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\59e3a3db-0e78-408c-bb7c-2d6d9422befa1-1-370x500.jpg",
+      "SourceId": "ProniaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
+      "BasePath": "_content/ProniaApp",
+      "RelativePath": "assets/images/website-images/59e3a3db-0e78-408c-bb7c-2d6d9422befa1-1-370x500.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\59e3a3db-0e78-408c-bb7c-2d6d9422befa1-1-370x500.jpg"
+    },
+    {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\5a967579-0408-476e-a45a-0ba65f36e4672-2-370x270.webp",
       "SourceId": "ProniaApp",
       "SourceType": "Discovered",
@@ -15468,6 +15434,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\5f0838e3-256a-4048-b998-d9ed6b14a0e0course_3.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\5fdbe4da-e288-457b-863b-0748d7547efb1-1920x465.jpg",
+      "SourceId": "ProniaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
+      "BasePath": "_content/ProniaApp",
+      "RelativePath": "assets/images/website-images/5fdbe4da-e288-457b-863b-0748d7547efb1-1920x465.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\5fdbe4da-e288-457b-863b-0748d7547efb1-1920x465.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\60d62808-d2eb-48cb-8535-4cc45f80e612course_6.jpg",
@@ -15980,6 +15963,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\82f2fdad-5dea-45db-9d01-e5f0a4850b03course_6.jpg"
     },
     {
+      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\833dfffa-a117-4c76-a761-2261d9eecb231-1-1820x443.jpg",
+      "SourceId": "ProniaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
+      "BasePath": "_content/ProniaApp",
+      "RelativePath": "assets/images/website-images/833dfffa-a117-4c76-a761-2261d9eecb231-1-1820x443.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\833dfffa-a117-4c76-a761-2261d9eecb231-1-1820x443.jpg"
+    },
+    {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\844fcacd-3945-41e2-84d1-846db314bb8dcourse_6.jpg",
       "SourceId": "ProniaApp",
       "SourceType": "Discovered",
@@ -16182,6 +16182,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\8f5f9f10-7389-4b76-b8de-ec4cba1149a31-1-768x546.webp"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\931bfc80-cb06-497c-9bf4-ec556b82c6303-1-1208x542.jpg",
+      "SourceId": "ProniaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\",
+      "BasePath": "_content/ProniaApp",
+      "RelativePath": "assets/images/website-images/931bfc80-cb06-497c-9bf4-ec556b82c6303-1-1208x542.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\931bfc80-cb06-497c-9bf4-ec556b82c6303-1-1208x542.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\Backend-Pronia\\ProniaApp\\ProniaApp\\wwwroot\\assets\\images\\website-images\\94049adb-c3c3-4d08-b336-87421f720a4b1-2-524x617.png",

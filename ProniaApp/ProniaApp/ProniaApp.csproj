@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\assets\images\breadcrumb\bg\" />
+    <Folder Include="wwwroot\assets\images\contact\" />
     <Folder Include="wwwroot\assets\images\footer\bg\" />
     <Folder Include="wwwroot\assets\images\logo\" />
     <Folder Include="wwwroot\assets\images\slider\bg\" />

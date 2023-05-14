@@ -19,6 +19,7 @@ namespace ProniaApp.Models
         public ICollection<ProductCategory> ProductCategories { get; set; }
         public ICollection<ProductSize> ProductSizes { get; set; }
         public ICollection<ProductTag> ProductTags { get; set; }
-       
+        public ICollection<ProductComment> ProductComments { get; set; }
+        public ICollection<CartProduct> CartProducts { get; set; }
     }
 }

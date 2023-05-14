@@ -21,7 +21,7 @@ namespace ProniaApp.Services
 
         public async Task<IEnumerable<Blog>> GetAllAsync()
         {
-            return await _context.Blogs.Include(b=>b.BlogImages).ToListAsync();
+            return await _context.Blogs.Include(b=>b.BlogImages).Include(b=>b.BlogComments).ToListAsync();
         }
 
         public async Task<Blog> GetBlogByImageId(int? id)
@@ -31,13 +31,12 @@ namespace ProniaApp.Services
 
         public async Task<Blog> GetByIdAsync(int? id)
         {
-            return await _context.Blogs.Include(b=>b.BlogImages).FirstOrDefaultAsync(b => b.Id == id);
+            return await _context.Blogs.Include(b=>b.BlogImages).Include(b=>b.BlogComments).FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task<Blog> GetByIdTrackAsync(int? id)
         {
             return await _context.Blogs.AsNoTracking().Include(b => b.BlogImages).FirstOrDefaultAsync(b => b.Id == id);
-
         }
 
         public async Task<int> GetCountAsync()
@@ -54,6 +53,7 @@ namespace ProniaApp.Services
         {
             return await _context.Blogs
                 .Include(b => b.BlogImages)
+                .Include(b=>b.BlogComments)
                 .Skip((page * take) - take)
                 .Take(take)
                 .ToListAsync();

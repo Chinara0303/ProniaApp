@@ -1,5 +1,6 @@
 ﻿@model ContactVM
 @inject UserManager<AppUser> userManager;
+@inject ILayoutService layout;
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,7 +8,7 @@
 <!-- Begin Main Content Area -->
 <main class="main-content">
     <div class="breadcrumb-area breadcrumb-height"
-         data-bg-image="~/assets/images/breadcrumb/bg/1-1-1919x388.jpg">
+         data-bg-image="/assets/images/website-images/@layout.GetSectionBackgroundImages()["ContactIntroBg"]">
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col-lg-12">
@@ -30,7 +31,7 @@
                 <div class="col-lg-12">
                     <div class="contact-wrap">
                         <div class="contact-info text-white"
-                             data-bg-image="~/assets/images/contact/1-1-370x500.jpg">
+                             data-bg-image="/assets/images/website-images/@layout.GetSectionBackgroundImages()["ContactInfoBg"]">
                             <h2 class="contact-title">Contact Info:</h2>
                             <p class="contact-desc">
                                 Fill the form amd our teaam will get to back to you within
@@ -39,15 +40,15 @@
                             <ul class="contact-list">
                                 <li>
                                     <i class="pe-7s-call"></i>
-                                    <a href="tel://123-456-789">123 456 789</a>
+                                    <a href="tel://123-456-789">@layout.GetSettings()["Phone"]</a>
                                 </li>
                                 <li>
                                     <i class="pe-7s-mail"></i>
-                                    <a href="mailto://info@example.com">info@example.com</a>
+                                    <a href="mailto://info@example.com">@layout.GetSettings()["Email"]</a>
                                 </li>
                                 <li>
                                     <i class="pe-7s-map-marker"></i>
-                                    <span>13, Your Address, Here</span>
+                                    <span>@layout.GetSettings()["Address"]</span>
                                 </li>
                             </ul>
                         </div>

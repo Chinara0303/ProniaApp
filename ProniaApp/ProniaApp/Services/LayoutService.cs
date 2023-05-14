@@ -13,6 +13,8 @@ namespace ProniaApp.Services
             _context = context;
         }
 
+     
+
         public  Setting GetById(int? id)
         {
             return _context.Settings.Where(s => s.Id == id).FirstOrDefault(); 
@@ -43,11 +45,21 @@ namespace ProniaApp.Services
             return await _context.SectionHeaders.ToListAsync();
         }
 
+        public Dictionary<string, string> GetSectionsHeaders()
+        {
+            return _context.SectionHeaders.AsEnumerable().ToDictionary(s => s.Key, s => s.Value);
+        }
+
         public  async Task<List<Setting>> GetSettingDatas()
         {
             List<Setting> settings = await _context.Settings.ToListAsync();
 
             return settings;
+        }
+
+        public  Dictionary<string, string> GetSettings()
+        {
+            return _context.Settings.AsEnumerable().ToDictionary(s=>s.Key,s=>s.Value);
         }
     }
 }

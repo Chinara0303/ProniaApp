@@ -6441,10 +6441,15 @@ blockquote p {
 .table-content table td.product_remove {
   font-size: 20px;
 }
+td.product-thumbnail {
+    width: 150px !important;
+    height: 150px !important;
+}
+
 
 .table-content table td.product-thumbnail img {
-  width: auto;
-  height: 100%;
+    width: auto;
+    height: 100%;
 }
 
 .table-content table td.product-name {

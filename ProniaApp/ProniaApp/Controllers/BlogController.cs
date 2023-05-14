@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProniaApp.Areas.Admin.ViewModels.Category;
 using ProniaApp.Areas.Admin.ViewModels.Tag;
 using ProniaApp.Helpers;
@@ -17,18 +18,20 @@ namespace ProniaApp.Controllers
         private readonly ITagService _tagService;
         private readonly IProductService _productService;
         private readonly ILayoutService _layoutService;
+        private readonly ICrudService<BlogComment> _crudService;
         public BlogController(IBlogService blogService, 
                               ILayoutService layoutService,
                               ITagService tagService,
                               ICategoryService categoryService,
-                              IProductService productService)
+                              IProductService productService,
+                              ICrudService<BlogComment> crudService)
         {
             _blogService = blogService;
             _layoutService = layoutService;
             _tagService = tagService;
             _categoryService = categoryService;
             _productService = productService;
-
+            _crudService = crudService;
         }
         public async Task<IActionResult> Index(int page = 1, int take = 2)
         {
@@ -44,7 +47,7 @@ namespace ProniaApp.Controllers
                 PaginateDatas = paginatedDatas,
                 Categories = await _categoryService.GetAllAsync(),
                 Tags = await _tagService.GetAllAsync(),
-                Products = await _productService.GetFullDataAsync()
+                Products = await _productService.GetFullDataAsync(),
             };
             return View(model);
         }
@@ -65,6 +68,28 @@ namespace ProniaApp.Controllers
                 Blog = dbBlog,
             };
             return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> PostComment(BlogVM model, int? id, string userId)
+        {
+            if (id is null || userId == null) return BadRequest();
+            if (!ModelState.IsValid) return RedirectToAction(nameof(SingleBlog), new { id });
+
+            BlogComment blogComment = new()
+            {
+                Name = model.BlogCommentVM.Name,
+                Email = model.BlogCommentVM.Email,
+                Subject = model.BlogCommentVM.Subject,
+                Message = model.BlogCommentVM.Message,
+                AppUserId = userId,
+                BlogId = (int)id
+            };
+            await _crudService.CreateAsync(blogComment);
+            return RedirectToAction(nameof(SingleBlog), new { id });
         }
     }
 }

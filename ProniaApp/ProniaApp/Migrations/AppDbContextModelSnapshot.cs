@@ -330,10 +330,7 @@ namespace ProniaApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AppUserId1")
+                    b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("BlogId")
@@ -362,7 +359,7 @@ namespace ProniaApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId1");
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("BlogId");
 
@@ -425,6 +422,68 @@ namespace ProniaApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brands");
+                });
+
+            modelBuilder.Entity("ProniaApp.Models.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("SoftDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("ProniaApp.Models.CartProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("SoftDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartProducts");
                 });
 
             modelBuilder.Entity("ProniaApp.Models.Category", b =>
@@ -769,101 +828,119 @@ namespace ProniaApp.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4943),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(689),
                             Key = "SliderBg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4944),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(690),
                             Value = "1-1.jpg"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4945),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(694),
                             Key = "BrandBg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4946),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(695),
                             Value = "1-1170x300.jpg"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4947),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(696),
                             Key = "FooterBg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4948),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(697),
                             Value = "1-1920x465.jpg"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4949),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(698),
                             Key = "ShopIntroBg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4949),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(698),
                             Value = "1-1-1919x388.jpg"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4950),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(703),
                             Key = "BlogIntroBg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4951),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(703),
                             Value = "1-1-1919x388.jpg"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4952),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(704),
                             Key = "AboutIntroBg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4952),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(705),
                             Value = "1-1-1919x388.jpg"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4953),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(706),
                             Key = "ContactIntroBg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4954),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(707),
                             Value = "1-1-1919x388.jpg"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4955),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(708),
                             Key = "ContactInfoBg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4955),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(709),
                             Value = "1-1-1919x388.jpg"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4957),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(710),
                             Key = "CartIntroBg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4958),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(711),
                             Value = "1-1-1919x388.jpg"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4959),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(712),
                             Key = "AccountIntroBg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4959),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(712),
                             Value = "1-1-1919x388.jpg"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4960),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(713),
                             Key = "SingleProductIntroBg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4961),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(714),
                             Value = "1-1-1919x388.jpg"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(716),
+                            Key = "TestimonialBg",
+                            SoftDelete = false,
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(717),
+                            Value = "1-1-1820x443.jpg"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(718),
+                            Key = "AboutItemBg",
+                            SoftDelete = false,
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(718),
+                            Value = " 3 - 1 - 1208x542.jpg"
                         });
                 });
 
@@ -898,109 +975,109 @@ namespace ProniaApp.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4882),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(627),
                             Key = "ProductTitle",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4883),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(628),
                             Value = "OUR PRODUCTS"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4889),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(631),
                             Key = "NewProductTitle",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4890),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(632),
                             Value = "NEW PRODUCTS"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4891),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(634),
                             Key = "NewProductDesc",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4891),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(634),
                             Value = "Contrary to popular belief, Lorem Ipsum is not simply random text.It has roots in a piece of classical Latin literature"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4892),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(636),
                             Key = "TestimonialTitle",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4893),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(637),
                             Value = "WHAT SAY CLIENT"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4894),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(638),
                             Key = "TestimonialDesc",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4894),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(639),
                             Value = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4895),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(640),
                             Key = "LatestBlogTitle",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4895),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(640),
                             Value = "LATEST BLOG"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4896),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(641),
                             Key = "LatestBlogDesc",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4897),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(642),
                             Value = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4898),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(644),
                             Key = "OurStoryTitle",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4898),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(644),
                             Value = "<h2 class='about-title'>Our<span> Story</span></h2>"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4899),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(646),
                             Key = "OurStoryDesc",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4900),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(646),
                             Value = "Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4900),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(648),
                             Key = "CounterTitle",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4901),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(648),
                             Value = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Sed ut perspiciatis"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4902),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(650),
                             Key = "OurTeamTitle",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4902),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(650),
                             Value = "OUR TEAM"
                         },
                         new
                         {
                             Id = 13,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4903),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(652),
                             Key = "OurTeamDesc",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4904),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(652),
                             Value = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature"
                         });
                 });
@@ -1036,55 +1113,55 @@ namespace ProniaApp.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4579),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(189),
                             Key = "Logo",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4590),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(202),
                             Value = "dark.png"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4594),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(210),
                             Key = "Phone",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4595),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(211),
                             Value = "+00 123 456 789"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4597),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(213),
                             Key = "Offer",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4597),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(213),
                             Value = "HELLO EVERYONE!25 % Off All Products"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4599),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(214),
                             Key = "PaymentImg",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4599),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(215),
                             Value = "1.png"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4600),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(216),
                             Key = "Email",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4601),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(217),
                             Value = "info@example.com"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4602),
+                            CreatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(218),
                             Key = "Address",
                             SoftDelete = false,
-                            UpdatedDate = new DateTime(2023, 5, 12, 20, 45, 44, 203, DateTimeKind.Local).AddTicks(4603),
+                            UpdatedDate = new DateTime(2023, 5, 14, 3, 28, 51, 48, DateTimeKind.Local).AddTicks(219),
                             Value = "13, Your Address, Here"
                         });
                 });
@@ -1290,10 +1367,10 @@ namespace ProniaApp.Migrations
                 {
                     b.HasOne("ProniaApp.Models.AppUser", "AppUser")
                         .WithMany()
-                        .HasForeignKey("AppUserId1");
+                        .HasForeignKey("AppUserId");
 
                     b.HasOne("ProniaApp.Models.Blog", "Blog")
-                        .WithMany()
+                        .WithMany("BlogComments")
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1312,6 +1389,34 @@ namespace ProniaApp.Migrations
                         .IsRequired();
 
                     b.Navigation("Blog");
+                });
+
+            modelBuilder.Entity("ProniaApp.Models.Cart", b =>
+                {
+                    b.HasOne("ProniaApp.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("ProniaApp.Models.CartProduct", b =>
+                {
+                    b.HasOne("ProniaApp.Models.Cart", "Cart")
+                        .WithMany("CartProducts")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProniaApp.Models.Product", "Product")
+                        .WithMany("CartProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("ProniaApp.Models.Product", b =>
@@ -1351,7 +1456,7 @@ namespace ProniaApp.Migrations
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("ProniaApp.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductComments")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1412,7 +1517,14 @@ namespace ProniaApp.Migrations
 
             modelBuilder.Entity("ProniaApp.Models.Blog", b =>
                 {
+                    b.Navigation("BlogComments");
+
                     b.Navigation("BlogImages");
+                });
+
+            modelBuilder.Entity("ProniaApp.Models.Cart", b =>
+                {
+                    b.Navigation("CartProducts");
                 });
 
             modelBuilder.Entity("ProniaApp.Models.Category", b =>
@@ -1427,7 +1539,11 @@ namespace ProniaApp.Migrations
 
             modelBuilder.Entity("ProniaApp.Models.Product", b =>
                 {
+                    b.Navigation("CartProducts");
+
                     b.Navigation("ProductCategories");
+
+                    b.Navigation("ProductComments");
 
                     b.Navigation("ProductImages");
 

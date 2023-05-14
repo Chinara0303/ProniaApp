@@ -21,5 +21,6 @@ namespace ProniaApp.Services
         {
             return await _context.Banners.FirstOrDefaultAsync(c => c.Id == id);
         }
+      
     }
 }

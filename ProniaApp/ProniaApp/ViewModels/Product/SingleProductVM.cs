@@ -10,6 +10,7 @@ namespace ProniaApp.ViewModels.Product
         public string SKU { get; set; }
         public int  Rating { get; set; }
         public string  Description { get; set; }
+        public ICollection<ProductComment> ProductComments { get; set; }
         public ICollection<ProductCategory> ProductCategories { get; set; }
         public ICollection<ProductTag> ProductTags { get; set; }
         public ICollection<ProductImage> ProductImages { get; set; }
