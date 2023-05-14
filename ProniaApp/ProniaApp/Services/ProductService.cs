@@ -260,6 +260,16 @@ namespace ProniaApp.Services
                 .OrderByDescending(p=>p.Color.Name)
                 .ToListAsync();
         }
+
+        public async Task<List<Product>> GetAllBySearchText(string searchText)
+        {
+            var products = await _context.Products
+                .Include(p => p.ProductImages)
+                .OrderByDescending(p => p.Id)
+                .Where(p => p.Name.ToLower().Contains(searchText.ToLower()))
+                .ToListAsync();
+            return products;
+        }
     }
 
 }

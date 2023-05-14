@@ -757,14 +757,15 @@
                             Start typing and press Enter to search or ESC to
                             close
                         </span>
-                        <form action="#" class="hm-searchbox">
-                            <input type="text"
+                        <form action=# class="hm-searchbox">
+                            <input class="input-search"
+                                type="text"
                                    name="Search..."
                                    value="Search..."
                                    onblur="if(this.value==''){this.value='Search...'}"
                                    onfocus="if(this.value=='Search...'){this.value=''}"
                                    autocomplete="off" />
-                            <button class="search-btn"
+                            <button class="search-btn search-button"
                                     type="submit"
                                     aria-label="searchbtn">
                                 <i class="pe-7s-search"></i>
@@ -776,8 +777,42 @@
         </div>
     </div>
     <div class="offcanvas-minicart_wrapper miniCart" id="miniCart">
-      <partial name="_CartDetailPartial" model="@Model.CartDetailVMs"/>
+        <div class="offcanvas-body">
+            <div class="minicart-content">
+                <div class="minicart-heading">
+                    <h4 class="mb-0">Shopping Cart</h4>
+                    <a href="#" class="button-close">
+                        <i class="pe-7s-close"
+                           data-tippy="Close"
+                           data-tippy-inertia="true"
+                           data-tippy-animation="shift-away"
+                           data-tippy-delay="50"
+                           data-tippy-arrow="true"
+                           data-tippy-theme="sharpborder"></i>
+                    </a>
+                </div>
+                <ul class="minicart-list">
+                    <partial name="_CartDetailPartial" model="@Model.CartDetailVMs" />
+                </ul>
+               
+            </div>
+            
+            <div class="group-btn_wrap d-grid gap-2">
+                <a asp-controller="Cart" asp-action="Index" class="btn btn-dark">View Cart</a>
+                <a href="checkout.html" class="btn btn-dark">Checkout</a>
+            </div>
+
+            @*<div class="alert alert-secondary empty-msg d-block" role="alert">
+            There are no products in the cart!
+            </div>*@
+
+        </div>
+
+     
     </div>
     <div class="global-overlay"></div>
 </header>
 
+@section Scripts{
+    <script src="~/assets/js/index.js"></script>
+ }
