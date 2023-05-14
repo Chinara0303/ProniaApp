@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductComment>
+﻿@model List<ProductComment>
 @{
     ViewData["Title"] = "Index";
 }
@@ -6,7 +6,6 @@
 @section Css{
     <link rel="stylesheet" href="~/admin/assets/css/index.css">
 }
-
 <section class="pcoded-main-container">
     <div class="pcoded-content">
         <div class="row">
@@ -19,22 +18,30 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Product name</th>
+                                            <th>User Name</th>
+                                            <th>Comment</th>
+                                            <th>Product Name</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var category in Model)
+                                        @foreach (var comment in Model)
                                         {
-                                            <tr data-id="@category.Id">
-                                                <td>@category.Name</td>
+                                            <tr data-id="@comment.Id">
+                                                <td>@comment.Name</td>
+                                                <td>@comment.Message</td>
+                                                <td>@comment.Product.Name</td>
                                                 <td>
-                                                    <a asp-action="Edit" asp-route-id="@category.Id" data-toggle="tooltip" data-original-title="Edit" class="edit">
-                                                        <i class="fa-solid fa-pen-to-square" style="color: #2bca16;"></i>
+                                                    <a asp-action="Detail" asp-route-id="@comment.Id" data-toggle="tooltip" data-original-title="Detail" class="detail">
+                                                        <i class="fa-solid fa-circle-info" style="color: #d8d10e;"></i>
                                                     </a>
-                                                    <a class="delete" data-toggle="tooltip" data-original-title="Remove">
+                                                    @if (User.IsInRole("SuperAdmin"))
+                                                    {
+                                                        <a class="delete-productComment" data-toggle="tooltip" data-original-title="Remove">
                                                         <i class="fa-solid fa-trash" style="color: #c81921;"></i>
                                                     </a>
+                                                    }
+                                                    
                                                 </td>
                                             </tr>
                                         }
@@ -53,4 +60,3 @@
 @section Script{
     <script src="~/admin/assets/js/index.js"></script>
 }
-

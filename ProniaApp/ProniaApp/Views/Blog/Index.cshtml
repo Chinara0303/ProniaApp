@@ -1,5 +1,6 @@
 ﻿@model  BlogVM
 @inject IBannerService banner
+@inject ILayoutService layout
 @{
     ViewData["Title"] = "Index";
     int? sumOfProductsCountByCategory = 0;
@@ -8,7 +9,7 @@
 <!-- Begin Main Content Area -->
 <main class="main-content">
     <div class="breadcrumb-area breadcrumb-height"
-         data-bg-image="/assets/images/website-images/@Model.SectionBgs["BlogIntroBg"]">
+         data-bg-image="assets/images/website-images/@layout.GetSectionBackgroundImages()["BlogIntroBg"]">
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col-lg-12">

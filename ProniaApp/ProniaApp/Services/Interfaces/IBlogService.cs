@@ -13,5 +13,8 @@ namespace ProniaApp.Services.Interfaces
         void AddRangeToBlog(List<BlogImage> images);
         Task<List<Blog>> GetPaginatedDatasAsync(int page, int take);
         Task<int> GetCountAsync();
+        Task<List<BlogComment>> GetComments();
+        Task<BlogComment> GetCommentById(int? id);
+        Task<BlogComment> GetCommentByIdWithBlog(int? id);
     }
 }

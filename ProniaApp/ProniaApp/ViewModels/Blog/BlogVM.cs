@@ -12,7 +12,6 @@ namespace ProniaApp.ViewModels.Blog
         public IEnumerable<Tag> Tags { get; set; }
         public IEnumerable<Models.Product> Products { get; set; }
         public Paginate<Models.Blog> PaginateDatas { get; set; }
-        public Dictionary<string, string> SectionBgs { get; set; }
         public BlogCommentVM BlogCommentVM { get; set; }
 
     }

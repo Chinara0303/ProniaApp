@@ -1,16 +1,27 @@
 ﻿@model RegisterVM
 @{
     ViewData["Title"] = "Default";
+    string[] res =(string[])TempData["errors"];
 }
 
 <div class="col-lg-6 pt-5 pt-lg-0">
+    
+  
+
     <form  method="post" asp-action="Register" >
+        @if (res != null)
+        {
+            foreach (var item in res)
+            {
+                <div class="text-danger">@item</div>
+            }
+        }
         <div class="login-form">
             <h4 class="login-title">Register</h4>
             <div class="row">
                 <div class="col-md-6 col-12">
                     <label>First Name</label>
-                    <input type="text" placeholder="First Name" asp-for="FirstName" />
+                    <input  placeholder="First Name" asp-for="FirstName" />
                     <span class="text-danger" asp-validation-for="FirstName"></span>
                 </div>
                 <div class="col-md-6 col-12">
@@ -20,17 +31,17 @@
                 </div>
                 <div class="col-md-12">
                     <label>Email Address*</label>
-                    <input type="email" placeholder="Email Address" asp-for="Email" />
+                    <input  placeholder="Email Address" asp-for="Email" />
                     <span class="text-danger" asp-validation-for="Email"></span>
                 </div>
                 <div class="col-md-6">
                     <label>Password</label>
-                    <input type="password" placeholder="Password" asp-for="Password"/>
+                    <input  placeholder="Password" asp-for="Password"/>
                     <span class="text-danger" asp-validation-for="Password"></span>
                 </div>
                 <div class="col-md-6">
                     <label>Confirm Password</label>
-                    <input type="password" placeholder="Confirm Password" asp-for="ConfirmPassword"/>
+                    <input  placeholder="Confirm Password" asp-for="ConfirmPassword"/>
                     <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
                 </div>
                 <div class="col-12">
@@ -42,3 +53,7 @@
         </div>
     </form>
 </div>
+
+@section Scripts{
+    <script src="_ValidationScriptsPartial"></script>
+}

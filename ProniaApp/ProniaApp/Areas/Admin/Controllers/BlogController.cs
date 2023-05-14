@@ -29,7 +29,6 @@ namespace ProniaApp.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-           
             return View(await _blogService.GetAllAsync());
         }
 
@@ -309,7 +308,7 @@ namespace ProniaApp.Areas.Admin.Controllers
 
                 _crudService.Delete(dbBlog);
 
-                return RedirectToAction(nameof(Index));
+                return Ok();
             }
             catch (Exception ex)
             {

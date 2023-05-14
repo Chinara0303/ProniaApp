@@ -124,7 +124,7 @@ namespace ProniaApp.Areas.Admin.Controllers
 
                 _crudService.Delete(dbCategory);
 
-                return RedirectToAction(nameof(Index));
+                return Ok();
             }
             catch (Exception ex)
             {

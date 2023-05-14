@@ -43,7 +43,6 @@ namespace ProniaApp.Controllers
             BlogVM model = new()
             {
                 Blogs = blogs.ToList(),
-                SectionBgs = _layoutService.GetSectionBackgroundImages(),
                 PaginateDatas = paginatedDatas,
                 Categories = await _categoryService.GetAllAsync(),
                 Tags = await _tagService.GetAllAsync(),
@@ -63,9 +62,16 @@ namespace ProniaApp.Controllers
         {
             if (id is null) return BadRequest();
             var dbBlog = await _blogService.GetByIdAsync((int)id);
+            if (dbBlog is null) return NotFound();
+            var blogs = await _blogService.GetAllAsync();
+
             BlogVM model = new()
             {
                 Blog = dbBlog,
+                Blogs = blogs.ToList(),
+                Categories = await _categoryService.GetAllAsync(),
+                Tags = await _tagService.GetAllAsync(),
+                Products = await _productService.GetFullDataAsync(),
             };
             return View(model);
         }

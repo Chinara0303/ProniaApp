@@ -1,4 +1,6 @@
 ﻿@model List<CartDetailVM>
+@inject ILayoutService layout
+
 @{
     ViewData["Title"] = "Index";
     decimal grandTotal = 0;
@@ -7,7 +9,7 @@
 <!-- Begin Main Content Area -->
 <main class="main-content">
     <div class="breadcrumb-area breadcrumb-height"
-         data-bg-image="~/assets/images/breadcrumb/bg/1-1-1919x388.jpg">
+         data-bg-image="assets/images/website-images/@layout.GetSectionBackgroundImages()["CartIntroBg"]">
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col-lg-12">
@@ -69,7 +71,7 @@
                                                 </td>
                                                 <td class="product-price">
                                                     <span>$</span>
-                                                    <span class="amount">@item.Price</span>
+                                                    <span class="amount">@item.Price.ToString("0.00")</span>
                                                 </td>
                                                 <td class="quantity">
                                                     <div class="cart-plus-minus">
@@ -86,7 +88,7 @@
                                                 </td>
                                                 <td class="product-subtotal">
                                                     <span>$</span>
-                                                    <span class="amount">@item.Total</span>
+                                                    <span class="amount">@item.Total.ToString("0.00")</span>
                                                 </td>
                                            </tr>
                                         }
@@ -97,30 +99,7 @@
                             }
 
                         </div>
-                        <div class="row product-table">
-                            <div class="col-12">
-                                <div class="coupon-all">
-                                    <div class="coupon">
-                                        <input id="coupon_code"
-                                               class="input-text"
-                                               name="coupon_code"
-                                               value=""
-                                               placeholder="Coupon code"
-                                               type="text" />
-                                        <input class="button mt-xxs-30"
-                                               name="apply_coupon"
-                                               value="Apply coupon"
-                                               type="submit" />
-                                    </div>
-                                    <div class="coupon2">
-                                        <input class="button"
-                                               name="update_cart"
-                                               value="Update cart"
-                                               type="submit" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                      
                         <div class="row">
                             <div class="col-md-5 ml-auto">
                                 <div class="cart-page-total">
@@ -132,10 +111,9 @@
                                             {
                                                 grandTotal += item.Total;
                                             }
-                                            <span class="grand-total">@grandTotal</span>
+                                            <span class="grand-total">@grandTotal.ToString("0.00")</span>
                                         </li>
                                     </ul>
-                                    <a href="#">Proceed to checkout</a>
                                 </div>
                             </div>
                         </div>

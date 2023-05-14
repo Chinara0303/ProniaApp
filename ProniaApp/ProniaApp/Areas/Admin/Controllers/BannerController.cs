@@ -161,7 +161,7 @@ namespace ProniaApp.Areas.Admin.Controllers
                 FileHelper.DeleteFile(path);
 
                 _crudService.Delete(dbBanner);
-                return RedirectToAction(nameof(Index));
+                return Ok();
             }
             catch (Exception ex)
             {

@@ -20,7 +20,7 @@ namespace ProniaApp.Services
 
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.Categories.Include(c=>c.ProductCategories).ToListAsync();
         }
 
         public async Task<Category> GetByIdAsync(int? id)

@@ -121,7 +121,7 @@ namespace ProniaApp.Areas.Admin.Controllers
 
                 _crudService.Delete(dbColor);
 
-                return RedirectToAction(nameof(Index));
+                return Ok();
             }
             catch (Exception ex)
             {

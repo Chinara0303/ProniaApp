@@ -39,6 +39,21 @@ namespace ProniaApp.Services
             return await _context.Blogs.AsNoTracking().Include(b => b.BlogImages).FirstOrDefaultAsync(b => b.Id == id);
         }
 
+        public async Task<BlogComment> GetCommentById(int? id)
+        {
+            return await _context.BlogComments.FindAsync(id);
+        }
+
+        public async Task<BlogComment> GetCommentByIdWithBlog(int? id)
+        {
+            return await _context.BlogComments.Include(b => b.Blog).FirstOrDefaultAsync(b => b.Id == id);
+        }
+
+        public async Task<List<BlogComment>> GetComments()
+        {
+            return await _context.BlogComments.Include(b=>b.Blog).ToListAsync();
+        }
+
         public async Task<int> GetCountAsync()
         {
             return await _context.Blogs.CountAsync();

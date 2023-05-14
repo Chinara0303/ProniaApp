@@ -23,5 +23,8 @@ namespace ProniaApp.Services.Interfaces
         Task<int> GetProductsCountByTagAsync(int? tagid);
         Task<IEnumerable<Product>> GetRelatedProducts();
         Task<List<Product>> GetAllBySearchText(string searchText);
+        Task<List<ProductComment>> GetComments();
+        Task<ProductComment> GetCommentByIdWithProduct(int? id);
+        Task<ProductComment> GetCommentById(int? id);
     }
 }

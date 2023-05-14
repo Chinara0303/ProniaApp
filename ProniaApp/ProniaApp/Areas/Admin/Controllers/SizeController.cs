@@ -129,7 +129,7 @@ namespace ProniaApp.Areas.Admin.Controllers
 
                 _crudService.Delete(dbSize);
 
-                return RedirectToAction(nameof(Index));
+                return Ok();
             }
             catch (Exception ex)
             {

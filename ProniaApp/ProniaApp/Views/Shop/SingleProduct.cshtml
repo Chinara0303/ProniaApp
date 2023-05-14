@@ -122,9 +122,17 @@
                                            type="text" />
                                 </div>
                             </li>
-                            <li class="add-to-cart">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                 <li class="add-to-cart">
                               <a data-id="@Model.Id" class="add-to-cart-btn btn btn-custom-size lg-size btn-pronia-primary">Add to cart</a>
                             </li>
+                            }
+                            else{
+                                <li class="add-to-cart">
+                                    <a asp-controller="Account" asp-action="Index" class="btn btn-custom-size lg-size btn-pronia-primary">Add to cart</a>
+                                </li>
+                            }
                             <li class="wishlist-btn-wrap">
                                 <a class="custom-circle-btn" href="wishlist.html">
                                     <i class="pe-7s-like"></i>
@@ -340,10 +348,8 @@
                                             </div>
                                         </div>
                                     }
-                                    
                                    
                                 </div>
-
                                 @if (User.Identity.IsAuthenticated)
                                 {
                                     <div class="feedback-area">
@@ -390,7 +396,6 @@
                                     </div>
 
                                 }
-
                             </div>
                         </div>
                     </div>
@@ -422,7 +427,7 @@
                                                  src="~/assets/images/website-images/@item.ProductImages.Where(p=>p.IsMain).FirstOrDefault()?.ImgName"
                                                  alt="Product Images" />
                                             <img class="secondary-img"
-                                                 src="~/assets/images/website-images/@item.ProductImages.Where(p=>p.IsHover).FirstOrDefault()?.ImgName
+                                                 src="~/assets/images/website-images/@item.ProductImages.Where(p=>p.IsHover).FirstOrDefault()?.ImgName"
                                              alt="Product Images" />
                                         </a>
                                         <div class="product-add-action">
@@ -452,16 +457,32 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a 
-                                                        class="add-to-cart-btn"
-                                                       data-tippy="Add to cart"
-                                                       data-tippy-inertia="true"
-                                                       data-tippy-animation="shift-away"
-                                                       data-tippy-delay="50"
-                                                       data-tippy-arrow="true"
-                                                       data-tippy-theme="sharpborder">
-                                                        <i class="pe-7s-cart"></i>
-                                                    </a>
+                                                    @if (User.Identity.IsAuthenticated)
+                                                    {
+                                                        <a href="#"
+                                                           class="add-to-cart-btn"
+                                                           data-id="@item.Id"
+                                                           data-tippy="Add to cart"
+                                                           data-tippy-inertia="true"
+                                                           data-tippy-animation="shift-away"
+                                                           data-tippy-delay="50"
+                                                           data-tippy-arrow="true"
+                                                           data-tippy-theme="sharpborder">
+                                                            <i class="pe-7s-cart"></i>
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a asp-controller="Account" asp-action="Index"
+                                                           data-tippy="Add to cart"
+                                                           data-tippy-inertia="true"
+                                                           data-tippy-animation="shift-away"
+                                                           data-tippy-delay="50"
+                                                           data-tippy-arrow="true"
+                                                           data-tippy-theme="sharpborder">
+                                                            <i class="pe-7s-cart"></i>
+                                                        </a>
+                                                    }
                                                 </li>
                                             </ul>
                                         </div>
@@ -487,7 +508,6 @@
                                     </div>
                                 </div>
                             }
-
 
                         </div>
                     </div>

@@ -119,7 +119,7 @@ namespace ProniaApp.Areas.Admin.Controllers
 
                 _crudService.Delete(dbTag);
 
-                return RedirectToAction(nameof(Index));
+                return Ok();
             }
             catch (Exception ex)
             {

@@ -45,19 +45,18 @@
 
     function AddToCart(clickedElem, url) {
         $(document).on("click", clickedElem, function (e) {
-            debugger
             let id = $(this).attr("data-id");
             let data = { id: id };
+            let count = (".rounded-circle");
             $.ajax({
                 type: "Post",
                 url: url,
                 data: data,
                 success: function (res) {
-                    $(".minicart-list").empty();
-                    $(".minicart-list").html(res);
-                    //$(".empty-msg").removeClass("d-block")
+                    debugger
+                    $(count).text(res);
                 }
-            })
+            }) 
             return false;
         })
     }
@@ -145,12 +144,9 @@
 
 
     $(document).on("submit", ".hm-searchbox", function () {
-        console.log($(this))
         let value = $(".input-search").val();
-
         let url = `/Shop/Search?searchText=${value}`;
         window.location.assign(url);
         return false;
-     
     })
 })

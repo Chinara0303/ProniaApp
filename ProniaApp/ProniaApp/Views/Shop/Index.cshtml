@@ -97,21 +97,6 @@
 
                                 </ul>
                             </div>
-                            <div class="widgets-item widgets-filter">
-                                <h2 class="widgets-title mb-4">Price Filter</h2>
-                                <div class="price-filter">
-                                    <input type="text"
-                                           class="pronia-range-slider"
-                                           name="pronia-range-slider"
-                                           value=""
-                                           data-type="double"
-                                           data-min="16"
-                                           data-from="16"
-                                           data-to="300"
-                                           data-max="350"
-                                           data-grid="false" />
-                                </div>
-                            </div>
                             <div class="widgets-item">
                                 <h2 class="widgets-title mb-4">Populer Tags</h2>
                                 <ul class="widgets-tag">
@@ -146,7 +131,7 @@
                     <div class="product-topbar">
                         <ul>
                             <li class="page-count">
-                                <span>12</span> Product Found of <span>@Model.Products.Count()</span>
+                                <span>@Model.PaginateDatas.CurrentPage</span> Product Found of <span>@Model.PaginateDatas.TotalPage</span>
                             </li>
                             <li class="product-view-wrap">
                                 <ul class="nav" role="tablist">
@@ -173,8 +158,8 @@
                             </li>
                             <li class="short">
                                 <select class="nice-select">
-                                    <option><a asp-route-value="Sort by Rated" asp-controller="Shop" asp-action="Filter">Sort by Rated</a> </option>
-                                    <option><a asp-route-value="Sort by Popularity" asp-controller="Shop" asp-action="Filter">Sort by Popularity</a></option>
+                                    <option value="1">Sort by Rated</option>
+                                    <option value="2">Sort by Popularity</option>
                                     <option value="3">Sort by Default</option>
                                     <option value="4">Sort by Latest</option>
                                     <option value="5">Sort by High Price</option>
@@ -199,7 +184,7 @@
                                     <div class="col-12">
                                         <div class="product-item">
                                             <div class="product-img">
-                                                <a href="single-product-variable.html">
+                                                <a asp-controller="Shop" asp-action="SingleProduct" asp-route-id="@product.Id">
                                                     <img class="primary-img"
                                                          src="~/assets/images/website-images/@product.ProductImages?.Where(p=>p.IsMain).FirstOrDefault()?.ImgName"
                                                          alt="Product Images" />
@@ -256,15 +241,32 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="cart.html"
-                                                               data-tippy="Add to cart"
-                                                               data-tippy-inertia="true"
-                                                               data-tippy-animation="shift-away"
-                                                               data-tippy-delay="50"
-                                                               data-tippy-arrow="true"
-                                                               data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
+                                                            @if (User.Identity.IsAuthenticated)
+                                                            {
+                                                                <a href="#"
+                                                                   class="add-to-cart-btn"
+                                                                   data-id="@product.Id"
+                                                                   data-tippy="Add to cart"
+                                                                   data-tippy-inertia="true"
+                                                                   data-tippy-animation="shift-away"
+                                                                   data-tippy-delay="50"
+                                                                   data-tippy-arrow="true"
+                                                                   data-tippy-theme="sharpborder">
+                                                                    <i class="pe-7s-cart"></i>
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a asp-controller="Account" asp-action="Index"
+                                                                   data-tippy="Add to cart"
+                                                                   data-tippy-inertia="true"
+                                                                   data-tippy-animation="shift-away"
+                                                                   data-tippy-delay="50"
+                                                                   data-tippy-arrow="true"
+                                                                   data-tippy-theme="sharpborder">
+                                                                    <i class="pe-7s-cart"></i>
+                                                                </a>
+                                                            }
                                                         </li>
                                                     </ul>
                                                 </div>

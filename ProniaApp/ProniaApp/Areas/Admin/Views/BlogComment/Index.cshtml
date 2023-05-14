@@ -1,0 +1,63 @@
+﻿@model List<BlogComment>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Css{
+    <link rel="stylesheet" href="~/admin/assets/css/index.css">
+}
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            @if (Model.Count() > 0)
+                            {
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>User Name</th>
+                                            <th>Comment</th>
+                                            <th>Blog Name</th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var comment in Model)
+                                        {
+                                            <tr data-id="@comment.Id">
+                                                <td>@comment.Name</td>
+                                                <td>@comment.Message</td>
+                                                <td>@comment.Blog.Title</td>
+                                                <td>
+                                                    <a asp-action="Detail" asp-route-id="@comment.Id" data-toggle="tooltip" data-original-title="Detail" class="detail">
+                                                        <i class="fa-solid fa-circle-info" style="color: #d8d10e;"></i>
+                                                    </a>
+                                                    @if (User.IsInRole("SuperAdmin"))
+                                                    {
+                                                        <a class="delete-blogComment" data-toggle="tooltip" data-original-title="Remove">
+                                                            <i class="fa-solid fa-trash" style="color: #c81921;"></i>
+                                                        </a>
+                                                    }
+                                                   
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Script{
+    <script src="~/admin/assets/js/index.js"></script>
+}
+

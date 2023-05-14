@@ -1,17 +1,19 @@
 ﻿$(function () {
     //delete 
 
-    RemoveItem("/Admin/Slider/Delete");
-    RemoveItem("/Admin/Advert/Delete");
-    RemoveItem("/Admin/Category/Delete");
-    RemoveItem("/Admin/Size/Delete");
-    RemoveItem("/Admin/Testimonial/Delete");
-    RemoveItem("/Admin/Color/Delete");
-    RemoveItem("/Admin/Tag/Delete");
-    RemoveItem("/Admin/Banner/Delete");
-    RemoveItem("/Admin/Brand/Delete");
-    RemoveItem("/Admin/Blog/Delete");
-    RemoveItem("/Admin/Product/Delete");
+    RemoveItem(".delete-slider", "/Admin/Slider/Delete");
+    RemoveItem(".delete-advert", "/Admin/Advert/Delete");
+    RemoveItem(".delete-category", "/Admin/Category/Delete");
+    RemoveItem(".delete-size", "/Admin/Size/Delete");
+    RemoveItem(".delete-testimonial", "/Admin/Testimonial/Delete");
+    RemoveItem(".delete-color", "/Admin/Color/Delete");
+    RemoveItem(".delete-tag", "/Admin/Tag/Delete");
+    RemoveItem(".delete-banner", "/Admin/Banner/Delete");
+    RemoveItem(".delete-brand","/Admin/Brand/Delete");
+    RemoveItem(".delete-blog", "/Admin/Blog/Delete");
+    RemoveItem(".delete-product", "/Admin/Product/Delete");
+    RemoveItem(".delete-productComment", "/Admin/ProductComment/Delete");
+    RemoveItem(".delete-blogComment", "/Admin/ProductComment/Delete");
 
 
 
@@ -22,8 +24,8 @@
     RemoveImage("/Admin/Product/DeleteProductImage");
 
 
-    function RemoveItem(url) {
-        $(document).on("click", ".delete", function (e) {
+    function RemoveItem(clickedElem,url) {
+        $(document).on("click", clickedElem , function (e) {
             e.preventDefault()
             let deleteElem = $(this).parent().parent();
             let id = $(this).parent().parent().attr("data-id");

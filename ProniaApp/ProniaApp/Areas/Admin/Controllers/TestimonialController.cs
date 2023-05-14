@@ -166,7 +166,7 @@ namespace ProniaApp.Areas.Admin.Controllers
                 FileHelper.DeleteFile(path);
 
                 _crudService.Delete(dbTestimonial);
-                return RedirectToAction(nameof(Index));
+                return Ok();
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProniaApp.Areas.Admin.ViewModels.Advert;
 using ProniaApp.Areas.Admin.ViewModels.Slider;
 using ProniaApp.Data;

@@ -14,7 +14,7 @@ namespace ProniaApp.Services
         }
         public async Task<IEnumerable<Tag>> GetAllAsync()
         {
-            return await _context.Tags.ToListAsync();
+            return await _context.Tags.Include(t=>t.ProductTags).ToListAsync();
         }
 
         public async Task<Tag> GetByIdAsync(int? id)

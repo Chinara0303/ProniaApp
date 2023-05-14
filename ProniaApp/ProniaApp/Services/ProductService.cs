@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ProniaApp.Data;
 using ProniaApp.Models;
 using ProniaApp.Services.Interfaces;
@@ -9,7 +8,6 @@ namespace ProniaApp.Services
 {
     public class ProductService : IProductService
     {
-
         private readonly AppDbContext _context;
         public ProductService(AppDbContext context)
         {
@@ -55,6 +53,7 @@ namespace ProniaApp.Services
         {
             return await _context.Products
                 .Include(p => p.ProductImages)
+                .Include(p => p.ProductComments)
                 .Include(p => p.ProductCategories)
                 .ThenInclude(pc => pc.Category)
                 .Include(p => p.ProductTags)
@@ -168,8 +167,6 @@ namespace ProniaApp.Services
                 });
             }
             return model;
-
-
         }
 
         public async Task<List<ProductVM>> GetProductsByColorIdAsync(int? id)
@@ -270,6 +267,20 @@ namespace ProniaApp.Services
                 .ToListAsync();
             return products;
         }
-    }
 
+        public async Task<List<ProductComment>> GetComments()
+        {
+            return await _context.ProductComments.Include(p=>p.Product).ToListAsync();
+        }
+
+        public async Task<ProductComment> GetCommentByIdWithProduct(int? id)
+        {
+            return await _context.ProductComments.Include(p=>p.Product).FirstOrDefaultAsync(pc => pc.Id == id);
+        }
+
+        public async Task<ProductComment> GetCommentById(int? id)
+        {
+            return await _context.ProductComments.FirstOrDefaultAsync(pc => pc.Id == id);
+        }
+    }
 }

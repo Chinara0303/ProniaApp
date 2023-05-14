@@ -278,34 +278,9 @@ namespace ProniaApp.Controllers
 
             _cartService.SetDatasToCookie(carts, dbProduct, existProduct);
 
-            List<CartDetailVM> cartDetailVMs = new();
-            int count = 0;
-            foreach (var item in carts)
-            {
-                if(existProduct is not null)
-                {
-                    count = existProduct.Count;
+            int cartCount = carts.Count;
 
-                }
-                else
-                {
-                    count = item.Count;
-                }
-            }
-            CartDetailVM model = new()
-            {
-                Id = dbProduct.Id,
-                Name = dbProduct.Name,
-                Image = dbProduct.ProductImages.Where(pi => pi.IsMain).FirstOrDefault().ImgName,
-                Count = count,
-                Price = dbProduct.Price,
-                Total = dbProduct.Price * count,
-            };
-
-            cartDetailVMs.Add(model);
-
-            return PartialView("_CartDetailPartial", cartDetailVMs);
-
+            return Ok(cartCount);
         }
 
         public async Task<IActionResult> Search(string searchText)
