@@ -1,1 +1,2 @@
-# Pronia application is developed with MVC project
+# ProniaApp
+It is developed with MVC project
